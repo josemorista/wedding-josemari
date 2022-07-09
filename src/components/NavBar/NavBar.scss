@@ -1,0 +1,44 @@
+nav.nav-bar {
+	min-height: 8.5rem;
+	background-color: var(--color-white-100);
+	padding: 0rem 5%;
+
+	display: flex;
+	align-items: center;
+	gap: 4rem;
+
+	div {
+		&.names-and-date {
+			h1 {
+				font-weight: 500;
+				font-size: 1.8rem;
+				color: var(--color-gray-600);
+				font-family: Notera;
+				text-align: right;
+			}
+
+			h4 {
+				margin-top: 0.4rem;
+				text-align: right;
+				font-weight: 400;
+			}
+		}
+
+		&.nav-links {
+			ul {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.8rem;
+			}
+
+			a.nav-link {
+				transition: border 1s;
+
+				&:hover {
+					border-bottom: 1px solid var(--color-gray-400);
+				}
+			}
+		}
+	}
+
+}
