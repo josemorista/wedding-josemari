@@ -32,10 +32,11 @@ nav.nav-bar {
 			}
 
 			a.nav-link {
-				transition: border 1s;
+				transition: 0.5s;
 
 				&:hover {
-					border-bottom: 1px solid var(--color-gray-400);
+					border-bottom: 1px solid var(--color-pink-400);
+					color: var(--color-pink-400);
 				}
 			}
 		}
