@@ -1,15 +1,6 @@
-@mixin loadFont($name, $weight, $path) {
-	@font-face {
-		font-family: $name;
-		font-weight: $weight;
-		src: url('../assets/fonts/' + $path + '.woff2') format('woff2'),
-			url('../assets/fonts/' + $path + '.woff') format('woff');
-	}
-}
-
-@include loadFont("Affogato", 400, "Affogato/Affogato-Regular");
-@include loadFont("Affogato", 300, "Affogato/Affogato-Light");
-@include loadFont("Affogato", 600, "Affogato/Affogato-Medium");
-@include loadFont("Affogato", 800, "Affogato/Affogato-Bold");
-@include loadFont("Affogato", 900, "Affogato/Affogato-Black");
-@include loadFont("Notera", 400, "Notera/Notera");
+@include load-font("Affogato", 400, "Affogato/Affogato-Regular");
+@include load-font("Affogato", 300, "Affogato/Affogato-Light");
+@include load-font("Affogato", 600, "Affogato/Affogato-Medium");
+@include load-font("Affogato", 800, "Affogato/Affogato-Bold");
+@include load-font("Affogato", 900, "Affogato/Affogato-Black");
+@include load-font("Notera", 400, "Notera/Notera");

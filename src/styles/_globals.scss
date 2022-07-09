@@ -1,3 +1,7 @@
+html {
+	scroll-behavior: smooth;
+}
+
 * {
 	font-family: Affogato;
 	-webkit-font-smoothing: antialiased;
@@ -7,7 +11,7 @@
 	margin: 0;
 	padding: 0;
 	box-shadow: none;
-	color: var(--color-gray-400);
+	color: $color-gray-400;
 }
 
 a {
