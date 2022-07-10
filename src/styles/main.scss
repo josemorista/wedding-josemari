@@ -9,10 +9,12 @@
 @import './globals';
 
 // Components
-@import './components/navBar';
-@import './components/menuIcon';
-@import './components/sidebarMenu';
-@import './components/sectionLinks';
+@import './components/atoms/menuIcon';
+
+@import './components/organisms/navBar';
+
+@import './components/molecules/sectionLinks';
+@import './components/organisms/sidebarMenu';
 
 // Views
-@import './app';
+@import './templates/app';

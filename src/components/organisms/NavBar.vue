@@ -18,6 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import MenuIcon from "./MenuIcon.vue";
-import SectionLinks from "./SectionLinks.vue";
+import MenuIcon from "../atoms/MenuIcon.vue";
+import SectionLinks from "../molecules/SectionLinks.vue";
 </script>

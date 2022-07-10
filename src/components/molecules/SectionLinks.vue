@@ -7,9 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import { SectionLink } from "../entities/SectionLink";
+import { SectionLink } from "../../entities/SectionLink";
 import { computed, defineProps } from "vue";
-import { useMenuStore } from "../store/menu";
+import { useMenuStore } from "../../store/menu";
 
 interface SectionLinksProps {
 	isVertical?: boolean;
