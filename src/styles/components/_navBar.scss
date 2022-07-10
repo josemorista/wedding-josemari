@@ -36,21 +36,6 @@ nav.nav-bar {
 
 		&.nav-links {
 			display: none;
-
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.8rem;
-			}
-
-			a.nav-link {
-				text-transform: uppercase;
-
-				&:hover {
-					border-bottom: 1px solid $color-pink-400;
-					color: $color-pink-400;
-				}
-			}
 		}
 	}
 }

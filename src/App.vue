@@ -1,5 +1,6 @@
 <template>
   <NavBar />
+  <SidebarMenu />
   <section class="hero" id="app-hero-section" />
   <section class="about" id="app-about-section">
     <p>
@@ -30,4 +31,5 @@
 
 <script setup lang="ts">
 import NavBar from "./components/NavBar.vue";
+import SidebarMenu from "./components/SidebarMenu.vue";
 </script>
