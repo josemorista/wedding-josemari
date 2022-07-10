@@ -1,0 +1,11 @@
+div.pictures-grid {
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 40rem;
+	gap: 1rem;
+
+	>img {
+		max-width: calc(50% - 1rem);
+		object-fit: cover;
+	}
+}

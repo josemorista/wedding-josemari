@@ -10,11 +10,13 @@
 
 // Components
 @import './components/atoms/menuIcon';
-
-@import './components/organisms/navBar';
+@import './components/atoms/sectionTitle';
 
 @import './components/molecules/sectionLinks';
+@import './components/molecules/picturesGrid';
+
+@import './components/organisms/navBar';
 @import './components/organisms/sidebarMenu';
 
 // Views
-@import './templates/app';
+@import './components/templates/app';

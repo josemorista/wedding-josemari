@@ -13,8 +13,8 @@
 		}
 
 		&.about {
-			margin-top: 2rem;
-			padding: 2rem;
+			margin-top: 4rem;
+			padding: 0 2rem;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -30,6 +30,18 @@
 				}
 			}
 		}
+
+		&.fiances {
+			@extend .about;
+
+			.section-title {
+				margin: 2rem 0 4rem 0;
+			}
+
+			.pictures-grid {
+				margin-bottom: 4rem;
+			}
+		}
 	}
 }
 
@@ -38,10 +50,6 @@
 		section {
 			&.hero {
 				height: 70vh;
-			}
-
-			&.about {
-				margin-top: 3rem;
 			}
 		}
 	}
