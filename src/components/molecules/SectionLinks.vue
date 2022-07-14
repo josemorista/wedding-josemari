@@ -27,7 +27,7 @@ const closeMenu = () => {
 const navLinks = [
 	new SectionLink("Home", "#app-hero-section"),
 	new SectionLink("Os noivos", "#app-fiances-section"),
-	new SectionLink("Os padrinhos", "#app-about-section"),
+	new SectionLink("Padrinhos", "#app-god-parents-section"),
 	new SectionLink("Cerimônia", "#app-about-section"),
 	new SectionLink("Recepção", "#app-about-section"),
 	new SectionLink("Lista de presentes", "#app-about-section"),

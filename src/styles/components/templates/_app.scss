@@ -13,7 +13,7 @@
 		}
 
 		&.about {
-			margin-top: 4rem;
+			margin-top: 2rem;
 			padding: 0 2rem;
 			display: flex;
 			flex-direction: column;
@@ -28,6 +28,7 @@
 				&+p {
 					margin-top: 1rem;
 				}
+
 			}
 		}
 
@@ -40,6 +41,20 @@
 
 			.pictures-grid {
 				margin-bottom: 4rem;
+			}
+		}
+
+		&.god-parents {
+			@extend .fiances;
+		}
+
+		&.location {
+			@extend .fiances;
+
+			img.tropical-picture {
+				margin-bottom: 3rem;
+				width: 85%;
+				object-fit: cover;
 			}
 		}
 	}
