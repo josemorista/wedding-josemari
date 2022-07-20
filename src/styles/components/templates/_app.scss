@@ -52,8 +52,8 @@
 			@extend .fiances;
 
 			img.tropical-picture {
-				margin-bottom: 3rem;
-				width: 85%;
+				margin: 2rem 0;
+				width: 98%;
 				object-fit: cover;
 			}
 		}
@@ -65,6 +65,12 @@
 		section {
 			&.hero {
 				height: 70vh;
+			}
+
+			&.location {
+				img.tropical-picture {
+					max-width: 45rem;
+				}
 			}
 		}
 	}

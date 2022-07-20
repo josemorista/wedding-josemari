@@ -28,8 +28,7 @@ const navLinks = [
 	new SectionLink("Home", "#app-hero-section"),
 	new SectionLink("Os noivos", "#app-fiances-section"),
 	new SectionLink("Padrinhos", "#app-god-parents-section"),
-	new SectionLink("Cerimônia", "#app-about-section"),
-	new SectionLink("Recepção", "#app-about-section"),
+	new SectionLink("Cerimônia", "#app-location-section"),
 	new SectionLink("Lista de presentes", "#app-about-section"),
 	new SectionLink("Confirme sua presença", "#app-about-section"),
 	new SectionLink("Recados", "#app-about-section")

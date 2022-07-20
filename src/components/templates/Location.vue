@@ -1,11 +1,11 @@
 <template>
 	<section class="location" id="app-location-section">
 		<SectionTitle title="Cerimônia" />
-		<img class="tropical-picture" src="src/assets/imgs/tropical.webp" alt="Tropical Casa de Festas">
 		<p>
-			<strong> 09 de julho de 2022, às 17h.</strong>
+			<strong> 12 de março de 2023, às 17h.</strong>
 			Primeira Igreja Batista de Niterói, Avenida Marques de Paraná - Centro, Niterói - RJ, CEP: 23.890-000.
 		</p>
+		<img class="tropical-picture" src="src/assets/imgs/tropical.webp" alt="Tropical Casa de Festas">
 	</section>
 </template>
 
