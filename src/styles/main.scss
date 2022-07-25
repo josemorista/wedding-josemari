@@ -6,14 +6,16 @@
 @import './colors';
 
 // Reset CSS and Globals
-@import './globals';
+@import './reset';
 
 // Components
 @import './components/atoms/menuIcon';
+@import './components/atoms/button';
 @import './components/atoms/sectionTitle';
 
 @import './components/molecules/sectionLinks';
 @import './components/molecules/picturesGrid';
+@import './components/molecules/giftItem';
 
 @import './components/organisms/navBar';
 @import './components/organisms/sidebarMenu';
