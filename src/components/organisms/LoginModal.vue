@@ -5,18 +5,17 @@
 				Nome na lista de presença:
 			</label>
 			<div style="display:flex">
-				<Input type="text" :value="data.guestName" @on-value-change="onNameChange" />
+				<Input type="text" v-model="data.guestName" />
 				<Button color="default">Buscar</Button>
 			</div>
 			<br />
 			<Checkbox :options="[{ label: 'Sim', value: 'yes' }, { label: 'Não', value: 'no' }]" label="Você irá ao evento?"
-				:selected="confirmedLabel" @on-value-change="onConfirmChange" />
+				:selected="confirmedLabel" @input="onConfirmChange" />
 			<br />
-			<Input type="number" max-width="100px" :value="data.numberOfEscorts" label="Quantidade de adultos incluindo você:"
-				@on-value-change="onEscortNumberChange" />
+			<Input type="number" max-width="100px" v-model="data.numberOfEscorts"
+				label="Quantidade de adultos incluindo você:" />
 			<br />
-			<Input type="number" max-width="100px" :value="data.numberOfChildren" label="Quantidade de crianças:"
-				@on-value-change="onChildrenNumberChange" />
+			<Input type="number" max-width="100px" v-model="data.numberOfChildren" label="Quantidade de crianças:" />
 		</template>
 		<template v-slot:footer>
 			<Button color="pink">Confirmar presença</Button>
@@ -43,22 +42,9 @@ const data: LoginModalData = reactive({
 	numberOfChildren: "0",
 	numberOfEscorts: "1"
 });
-
 const confirmedLabel = computed(() => data.confirmed ? "yes" : "no");
 const onConfirmChange = (value: string) => {
 	if (value === "yes") data.confirmed = true;
 	else data.confirmed = false;
 }
-
-const onNameChange = (value: string) => {
-	data.guestName = value;
-};
-
-const onEscortNumberChange = (value: string) => {
-	data.numberOfEscorts = value;
-};
-
-const onChildrenNumberChange = (value: string) => {
-	data.numberOfChildren = value;
-};
 </script>

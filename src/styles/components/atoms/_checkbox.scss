@@ -16,6 +16,7 @@ div.checkbox-options {
 
 			&.checked {
 				background-color: $color-pink-600;
+				border: 1px solid transparent;
 			}
 		}
 	}

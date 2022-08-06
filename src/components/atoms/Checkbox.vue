@@ -22,11 +22,11 @@ interface CheckboxProps {
 	}>
 }
 interface CheckboxEmits {
-	(event: "on-value-change", value: string): void;
+	(event: "input", value: string): void;
 }
 const emitter = defineEmits<CheckboxEmits>();
 defineProps<CheckboxProps>();
 const selectOption = (option: string) => {
-	emitter("on-value-change", option);
+	emitter("input", option);
 }
 </script>
