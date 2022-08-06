@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { defineEmits, defineProps } from "vue";
 interface ButtonProps {
-	color: "default";
+	color: "default" | "pink";
 }
 interface ButtonEmits {
 	onButtonClick: () => void;

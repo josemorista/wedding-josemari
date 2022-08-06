@@ -1,0 +1,45 @@
+div.modal-container {
+	position: fixed;
+	top: 0;
+	z-index: 100;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.25);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	>.modal {
+		background-color: $color-white-100;
+		min-height: 30rem;
+		width: calc(100% - 2rem);
+		max-width: 47rem;
+	}
+
+	.modal-header {
+		width: 100%;
+		background-color: $color-pink-600;
+		height: 6rem;
+
+		display: flex;
+		align-items: center;
+		padding: 0 2rem;
+
+		>h1 {
+			font-weight: 400;
+			font-family: 'Notera';
+			color: white;
+			font-size: 2rem;
+		}
+	}
+
+	.modal-content {
+		padding: 1rem 1.5rem;
+	}
+
+	.modal-footer {
+		padding: 1rem 1.5rem;
+		display: flex;
+		justify-content: flex-end;
+	}
+}

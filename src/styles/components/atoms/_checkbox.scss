@@ -1,0 +1,22 @@
+div.checkbox-options {
+	display: flex;
+	gap: 1rem;
+
+	>.checkbox-option {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+
+		.select-circle {
+			cursor: pointer;
+			border: 1px solid $color-gray-600;
+			border-radius: 50%;
+			width: 24px;
+			height: 24px;
+
+			&.checked {
+				background-color: $color-pink-600;
+			}
+		}
+	}
+}
