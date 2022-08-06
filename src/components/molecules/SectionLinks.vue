@@ -30,7 +30,6 @@ const navLinks = [
 	new SectionLink("Padrinhos", "#app-god-parents-section"),
 	new SectionLink("Cerimônia", "#app-location-section"),
 	new SectionLink("Lista de presentes", "#app-about-section"),
-	new SectionLink("Confirme sua presença", "#app-about-section"),
-	new SectionLink("Recados", "#app-about-section")
+	new SectionLink("Confirme sua presença", "#app-about-section")
 ];
 </script>

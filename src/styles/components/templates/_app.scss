@@ -14,7 +14,7 @@
 		}
 
 		&.content-section {
-			margin: 2rem 0;
+			margin-top: 3rem;
 			padding: 0 2rem;
 			display: flex;
 			flex-direction: column;
@@ -22,7 +22,7 @@
 			justify-content: center;
 
 			.section-title {
-				margin: 2rem 0 4rem 0;
+				margin-bottom: 3rem;
 			}
 
 			p {
@@ -35,6 +35,10 @@
 				}
 
 			}
+
+			&:last-of-type {
+				margin-bottom: 4.5rem;
+			}
 		}
 
 		&.about {
@@ -45,7 +49,7 @@
 			@extend .content-section;
 
 			.pictures-grid {
-				margin-bottom: 4rem;
+				margin-bottom: 3rem;
 			}
 		}
 
@@ -57,8 +61,10 @@
 			@extend .content-section;
 
 			img.tropical-picture {
-				margin: 2rem 0;
+				margin-top: 3rem;
 				width: 98%;
+				max-width: 45rem;
+				min-height: 10rem;
 				object-fit: cover;
 			}
 		}
@@ -72,11 +78,34 @@
 				height: 70vh;
 			}
 
-			&.location {
-				img.tropical-picture {
-					max-width: 45rem;
+			&.content-section {
+				margin-top: 4.5rem;
+
+				.section-title {
+					margin-bottom: 4.5rem;
+				}
+
+				&:last-of-type {
+					margin-bottom: 4.5rem;
 				}
 			}
+
+			&.fiances {
+				@extend .content-section;
+
+				.pictures-grid {
+					margin-bottom: 4.5rem;
+				}
+			}
+
+			&.location {
+				@extend .content-section;
+
+				img.tropical-picture {
+					min-height: 22rem;
+				}
+			}
+
 		}
 	}
 }

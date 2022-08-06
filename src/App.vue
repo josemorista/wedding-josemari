@@ -6,7 +6,6 @@
   <Fiances />
   <GodParents />
   <Location />
-  <Gifts />
 </template>
 
 <script setup lang="ts">
