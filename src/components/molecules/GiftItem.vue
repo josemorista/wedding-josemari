@@ -7,11 +7,17 @@
 		<p class="gift-price">
 			R$ 1499,20
 		</p>
-		<p class="gift-quantity-desired">
-			Precisamos: 4; Temos: 3
+		<p>
+			Precisamos: 4
 		</p>
-		<Button color="default">
+		<p>
+			Temos: 3
+		</p>
+		<Button color="pink">
 			Presentear
+		</Button>
+		<Button color="default">
+			Onde comprar?
 		</Button>
 	</div>
 </template>

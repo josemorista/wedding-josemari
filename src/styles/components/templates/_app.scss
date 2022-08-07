@@ -25,7 +25,7 @@
 				margin-bottom: 3rem;
 			}
 
-			p {
+			>p {
 				max-width: 45rem;
 				width: 100%;
 				line-height: 1.6rem;
@@ -78,6 +78,10 @@
 				max-width: 45rem;
 				min-height: 12rem;
 			}
+		}
+
+		&.gifts {
+			@extend .content-section;
 		}
 	}
 }
