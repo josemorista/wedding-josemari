@@ -54,18 +54,29 @@
 		}
 
 		&.god-parents {
-			@extend .content-section
+			@extend .content-section;
+
+			.pictures-grid {
+				margin-top: 3rem;
+			}
 		}
 
 		&.location {
 			@extend .content-section;
 
 			img.tropical-picture {
-				margin-top: 3rem;
+				margin: 3rem 0;
 				width: 98%;
 				max-width: 45rem;
-				min-height: 10rem;
+				min-height: 12rem;
 				object-fit: cover;
+			}
+
+			.tropical-map {
+				border: 0;
+				width: 100%;
+				max-width: 45rem;
+				min-height: 12rem;
 			}
 		}
 	}
@@ -98,11 +109,22 @@
 				}
 			}
 
+			&.god-parents {
+				.pictures-grid {
+					margin-top: 4.5rem;
+				}
+			}
+
 			&.location {
 				@extend .content-section;
 
 				img.tropical-picture {
+					margin: 4.5rem 0 3.5rem;
 					min-height: 22rem;
+				}
+
+				.tropical-map {
+					min-height: 25rem;
 				}
 			}
 

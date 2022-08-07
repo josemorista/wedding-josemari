@@ -2,10 +2,10 @@
 	<section class="fiances" id="app-fiances-section">
 		<SectionTitle title="Os Noivos" />
 		<PicturesGrid :pictures="[
-			'f-0.jpg',
-			'f-1.jpg',
-			'f-2.jpg',
-			'f-3.jpg'
+			{ picture: 'f-0.jpg' },
+			{ picture: 'f-1.jpg' },
+			{ picture: 'f-2.jpg' },
+			{ picture: 'f-3.jpg' }
 		]" />
 		<p>
 			Nos conhecemos no dia 12 de março de 2018, no dia dos namorados. O mundo vivia um dos momentos mais críticos da

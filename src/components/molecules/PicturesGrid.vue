@@ -1,7 +1,11 @@
 <template>
-	<div class="pictures-grid">
-		<img class="grid-picture" v-for="picture of pictures" :key="picture" :src="`src/assets/imgs/${picture}`"
-			alt="picture">
+	<div :class="{ 'pictures-grid': true, 'large': large }">
+		<div class="picture-grid-item" v-for="picture of pictures" :key="picture.picture">
+			<img class="grid-picture" :src="`src/assets/imgs/${picture.picture}`" :alt="picture.legend">
+			<legend v-if="picture.legend">
+				{{ picture.legend }}
+			</legend>
+		</div>
 	</div>
 </template>
 
@@ -9,9 +13,9 @@
 import { defineProps } from "vue";
 
 interface PicturesGridProps {
-	pictures: Array<string>;
+	pictures: Array<{ picture: string; legend?: string }>;
+	large?: boolean;
 }
-
-defineProps<PicturesGridProps>();
+const props = defineProps<PicturesGridProps>();
 
 </script>
