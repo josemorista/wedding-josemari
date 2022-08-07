@@ -15,4 +15,8 @@ button.btn {
 		background-color: $color-pink-600;
 		color: white;
 	}
+
+	&:disabled {
+		opacity: 0.6;
+	}
 }
