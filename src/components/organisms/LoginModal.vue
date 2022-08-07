@@ -10,12 +10,13 @@
 			</div>
 			<br />
 			<Checkbox :options="[{ label: 'Sim', value: 'yes' }, { label: 'Não', value: 'no' }]" label="Você irá ao evento?"
-				:selected="confirmedLabel" @input="onConfirmChange" />
+				v-model="data.confirmed" />
 			<br />
-			<Input type="number" max-width="100px" v-model="data.numberOfEscorts"
+			<Input type="number" max-width="100px" :model-value="data.numberOfEscorts" @update:model-value="onEscortsChange"
 				label="Quantidade de adultos incluindo você:" />
 			<br />
-			<Input type="number" max-width="100px" v-model="data.numberOfChildren" label="Quantidade de crianças:" />
+			<Input type="number" max-width="100px" :model-value="data.numberOfChildren" @update:model-value="onChildrenChange"
+				label="Quantidade de crianças:" />
 		</template>
 		<template v-slot:footer>
 			<Button color="pink">Confirmar presença</Button>
@@ -29,22 +30,26 @@ import Checkbox from "../atoms/Checkbox.vue";
 import Input from "../atoms/Input.vue";
 import Button from "../atoms/Button.vue";
 import { reactive } from "vue";
-import { computed } from "@vue/reactivity";
 interface LoginModalData {
 	guestName: string;
-	confirmed: boolean;
+	confirmed: string;
 	numberOfEscorts: string;
 	numberOfChildren: string;
 }
 const data: LoginModalData = reactive({
-	confirmed: true,
+	confirmed: "yes",
 	guestName: "",
 	numberOfChildren: "0",
 	numberOfEscorts: "1"
 });
-const confirmedLabel = computed(() => data.confirmed ? "yes" : "no");
-const onConfirmChange = (value: string) => {
-	if (value === "yes") data.confirmed = true;
-	else data.confirmed = false;
+const onEscortsChange = (value: string) => {
+	if (Number(value) <= 2) {
+		data.numberOfEscorts = value;
+	}
+};
+const onChildrenChange = (value: string) => {
+	if (Number(value) <= 2) {
+		data.numberOfChildren = value;
+	}
 }
 </script>

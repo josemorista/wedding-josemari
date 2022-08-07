@@ -16,9 +16,10 @@ interface InputProps {
 interface InputEmits {
 	(event: "update:modelValue", value: string): void;
 }
-defineProps<InputProps>();
+const props = defineProps<InputProps>();
 const emitter = defineEmits<InputEmits>();
 const onValueChange = ($event: any) => {
 	emitter("update:modelValue", $event.target.value);
+	$event.target.value = props.modelValue;
 };
 </script>

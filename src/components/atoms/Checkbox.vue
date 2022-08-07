@@ -2,7 +2,7 @@
 	<label class="custom-input-label">{{ label }}</label>
 	<div class="checkbox-options">
 		<div v-for="option of options" class="checkbox-option">
-			<span :class="{ 'select-circle': true, 'checked': option.value === selected }"
+			<span :class="{ 'select-circle': true, 'checked': option.value === modelValue }"
 				@click="selectOption(option.value)">
 			</span>
 			<p>
@@ -15,18 +15,18 @@
 <script setup lang="ts">
 interface CheckboxProps {
 	label: string;
-	selected: string;
+	modelValue: string;
 	options: Array<{
 		label: string;
 		value: string;
 	}>
 }
 interface CheckboxEmits {
-	(event: "input", value: string): void;
+	(event: "update:modelValue", value: string): void;
 }
 const emitter = defineEmits<CheckboxEmits>();
 defineProps<CheckboxProps>();
 const selectOption = (option: string) => {
-	emitter("input", option);
+	emitter("update:modelValue", option);
 }
 </script>

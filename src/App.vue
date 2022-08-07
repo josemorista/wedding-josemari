@@ -17,6 +17,5 @@ import About from "./components/templates/About.vue";
 import Fiances from "./components/templates/Fiances.vue";
 import GodParents from "./components/templates/GodParents.vue";
 import Location from "./components/templates/Location.vue";
-import Gifts from "./components/templates/Gifts.vue";
 import Modals from "./components/templates/Modals.vue";
 </script>
