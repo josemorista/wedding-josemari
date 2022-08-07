@@ -5,7 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps } from "vue";
 interface ButtonProps {
 	color: "default" | "pink";
 }

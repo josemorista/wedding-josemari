@@ -9,5 +9,5 @@
 
 <script setup lang="ts">
 import SectionTitle from "../atoms/SectionTitle.vue";
-import GiftsList from "../molecules/GiftsList.vue";
+import GiftsList from "../organisms/GiftsList.vue";
 </script>

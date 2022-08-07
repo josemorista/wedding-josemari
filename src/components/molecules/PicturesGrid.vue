@@ -10,12 +10,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
-
 interface PicturesGridProps {
 	pictures: Array<{ picture: string; legend?: string }>;
 	large?: boolean;
 }
-const props = defineProps<PicturesGridProps>();
+defineProps<PicturesGridProps>();
 
 </script>

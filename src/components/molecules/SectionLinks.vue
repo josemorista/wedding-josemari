@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { SectionLink } from "../../entities/SectionLink";
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 import { useMenuStore } from "../../store/menu";
 import { useModalStore } from "../../store/modal";
 
@@ -39,6 +39,6 @@ const navLinks = [
 	new SectionLink("Os noivos", "#app-fiances-section"),
 	new SectionLink("Padrinhos", "#app-god-parents-section"),
 	new SectionLink("Cerimônia", "#app-location-section"),
-	new SectionLink("Lista de presentes", "#app-about-section")
+	new SectionLink("Lista de presentes", "#app-gifts-section")
 ];
 </script>

@@ -19,4 +19,4 @@
 </template>
 
 <script setup lang="ts">
-import GiftItem from "./GiftItem.vue";</script>
+import GiftItem from "../molecules/GiftItem.vue";</script>

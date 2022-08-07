@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { InputHTMLAttributes, defineEmits, defineProps } from "vue";
+import { InputHTMLAttributes } from "vue";
 interface InputProps {
 	type: InputHTMLAttributes["type"];
 	modelValue: string;

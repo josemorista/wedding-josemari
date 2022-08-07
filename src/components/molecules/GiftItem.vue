@@ -1,6 +1,11 @@
 <template>
 	<div class="gift-item">
-		<img src="" alt="">
+		<div class="item-preview">
+			<img src="" alt="">
+			<span class="chosen-quantity">
+				x2
+			</span>
+		</div>
 		<p class="gift-name">
 			Avião do Faustão
 		</p>
@@ -18,6 +23,9 @@
 		</Button>
 		<Button color="default">
 			Onde comprar?
+		</Button>
+		<Button color="default">
+			Remover
 		</Button>
 	</div>
 </template>
