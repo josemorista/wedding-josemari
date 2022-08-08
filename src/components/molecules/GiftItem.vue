@@ -2,8 +2,8 @@
 	<div class="gift-item">
 		<div class="item-preview">
 			<img :src="gift.picture" :alt="gift.name">
-			<span v-if="quantityGiven" class="chosen-quantity">
-				x{{quantityGiven}}
+			<span v-if="gift.givenQuantity" class="chosen-quantity">
+				x{{gift.givenQuantity}}
 			</span>
 		</div>
 		<p class="gift-name">
@@ -18,45 +18,30 @@
 		<p>
 			Temos: {{gift.quantityNeeded - gift.quantityAvailableToGive}}
 		</p>
-		<Button color="pink" @click="addGift" :disabled="gift.quantityAvailableToGive === 0">
+		<Button color="pink" @click="() => {$emit('add-gift', gift.itemId);}" :disabled="gift.quantityAvailableToGive === 0">
 			Presentear
 		</Button>
 		<Button color="default">
 			Onde comprar?
 		</Button>
-		<Button v-if="!!quantityGiven" color="default" @click="dropGift">
+		<Button v-if="!!gift.givenQuantity" color="default" @click="() => {$emit('drop-gift', gift.itemId);}">
 			Remover
 		</Button>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "@vue/reactivity";
-import { toRef } from "vue";
 import { GiftOption } from "../../domain/entities/GiftOption";
-import { useGiftsStore } from "../../store/gifts";
 import Button from "../atoms/Button.vue";
 interface GiftItemProps {
-	gift: GiftOption;
+	gift: GiftOption & {
+		givenQuantity: number
+	};
 }
-const props = defineProps<GiftItemProps>();
-const giftsStore = useGiftsStore();
-const cartRef = toRef(giftsStore, 'cart');
-
-const quantityGiven = computed(() => {
-	return cartRef.value.find(el => el.itemId === props.gift.itemId)?.quantity;
-});
-
-const addGift = () => {
-	giftsStore.addGift({
-		itemId: props.gift.itemId,
-		quantity: 1
-	});
-};
-const dropGift = () => {
-	giftsStore.dropGift({
-		itemId: props.gift.itemId,
-		quantity: 1
-	});
-};
+interface GiftItemEmits {
+	(event: "add-gift", itemId: number): void;
+	(event: "drop-gift", itemId: number): void;
+}
+defineProps<GiftItemProps>();
+defineEmits<GiftItemEmits>();
 </script>

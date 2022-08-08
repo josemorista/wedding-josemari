@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 interface ModalStore {
-	currentOpen: "login" | null;
+	currentOpen: "login" | "cart" | null;
 }
 
 const initialState: ModalStore = {
@@ -15,6 +15,9 @@ export const useModalStore = defineStore("modal", {
 	actions: {
 		openLoginModal() {
 			this.currentOpen = "login";
+		},
+		openCartModal() {
+			this.currentOpen = "cart";
 		},
 		closeModal() {
 			this.currentOpen = null;

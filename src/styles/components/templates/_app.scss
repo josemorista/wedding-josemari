@@ -82,6 +82,17 @@
 
 		&.gifts {
 			@extend .content-section;
+
+			>main {
+				width: 100%;
+				max-width: 45rem;
+			}
+
+			.cart-button {
+				display: flex;
+				justify-content: flex-end;
+				margin-bottom: 1rem;
+			}
 		}
 	}
 }
