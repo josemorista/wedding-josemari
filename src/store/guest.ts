@@ -2,13 +2,7 @@ import { defineStore } from "pinia";
 import { Guest } from "../domain/entities/Guest";
 
 const initialState: { guest: Guest | null } = {
-	guest: {
-		confirmed: true,
-		id: 1,
-		name: "José",
-		numberOfChildren: 1,
-		numberOfEscorts: 1
-	}
+	guest: null
 };
 
 export const useGuestStore = defineStore("guest", {

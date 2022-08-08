@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { GiftOption } from "../domain/entities/GiftOption";
+import { ListGiftOptions } from "../domain/services/ListGiftOptions";
 import { useGuestStore } from "./guest";
 
 interface GiftsStoreState {
@@ -12,16 +13,10 @@ interface CartEntry {
 }
 
 const initialState: GiftsStoreState = {
-	options: [{
-		quantityNeeded: 4,
-		averagePrice: 1400,
-		history: [],
-		itemId: 1,
-		name: "Avião do Faustão",
-		picture: "",
-		quantityAvailableToGive: 4
-	}]
+	options: []
 };
+
+const listGiftOptionsService = new ListGiftOptions();
 
 export const useGiftsStore = defineStore("gifts", {
 	state() {
@@ -80,6 +75,9 @@ export const useGiftsStore = defineStore("gifts", {
 				}
 				option.quantityAvailableToGive += entry.quantity;
 			}
+		},
+		async loadOptions() {
+			this.options = await listGiftOptionsService.execute();;
 		}
 	}
 });

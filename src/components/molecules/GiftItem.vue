@@ -10,7 +10,7 @@
 			{{gift.name}}
 		</p>
 		<p class="gift-price">
-			{{gift.averagePrice}}
+			{{gift.formattedPrice}}
 		</p>
 		<p>
 			Precisamos: {{gift.quantityNeeded}}

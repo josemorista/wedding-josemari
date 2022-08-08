@@ -20,4 +20,16 @@ import Fiances from "./components/templates/Fiances.vue";
 import GodParents from "./components/templates/GodParents.vue";
 import Location from "./components/templates/Location.vue";
 import Gifts from "./components/templates/Gifts.vue";
+import { onMounted } from "vue";
+import { useGiftsStore } from "./store/gifts";
+
+const giftsStore = useGiftsStore();
+
+onMounted(async () => {
+  try {
+    await giftsStore.loadOptions();
+  } catch (error) {
+    console.error(error);
+  }
+})
 </script>
