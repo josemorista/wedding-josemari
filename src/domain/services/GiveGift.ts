@@ -1,0 +1,37 @@
+import { HttpError } from "../errors/HttpError";
+
+interface GiveGiftInput {
+	itemId: number;
+	quantity: number;
+	accessToken: string;
+}
+
+export class GiveGift {
+
+	async execute({
+		accessToken,
+		itemId,
+		quantity
+	}: GiveGiftInput): Promise<void> {
+		try {
+			const response = await fetch(`${import.meta.env.VITE_API_URL}/gifts`, {
+				method: "POST",
+				body: JSON.stringify({
+					itemId,
+					quantity
+				}),
+				headers: {
+					"Content-Type": "application/json",
+					"Authorization": `Bearer ${accessToken}`
+				}
+			});
+			const body = await response.json();
+			if (!response.ok) {
+				throw new HttpError(body.error || response.statusText, response.status);
+			}
+		} catch (error) {
+			if (error instanceof Error) throw new HttpError(error.message);
+			throw error;
+		}
+	}
+}
