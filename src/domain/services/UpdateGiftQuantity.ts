@@ -6,7 +6,7 @@ interface GiveGiftInput {
 	accessToken: string;
 }
 
-export class GiveGift {
+export class UpdateGiftQuantity {
 
 	async execute({
 		accessToken,
@@ -14,8 +14,8 @@ export class GiveGift {
 		quantity
 	}: GiveGiftInput): Promise<void> {
 		try {
-			const response = await fetch(`${import.meta.env.VITE_API_URL}/gifts`, {
-				method: "POST",
+			const response = await fetch(`${import.meta.env.VITE_API_URL}/gifts/quantity`, {
+				method: "PATCH",
 				body: JSON.stringify({
 					itemId,
 					quantity

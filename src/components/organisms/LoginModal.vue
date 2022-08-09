@@ -4,10 +4,10 @@
 			<label class="custom-input-label">
 				Nome na lista de presença:
 			</label>
-			<div style="display:flex">
+			<form style="display:flex" @submit.prevent="attemptToLogin">
 				<Input type="text" v-model="data.guestName" />
-				<Button color="default">Buscar</Button>
-			</div>
+				<Button type="submit" color="default">Buscar</Button>
+			</form>
 			<br />
 			<Checkbox :options="[{ label: 'Sim', value: 'yes' }, { label: 'Não', value: 'no' }]" label="Você irá ao evento?"
 				v-model="data.confirmed" />
@@ -19,7 +19,7 @@
 				label="Quantidade de crianças:" />
 		</template>
 		<template v-slot:footer>
-			<Button color="pink">Confirmar presença</Button>
+			<Button color="pink" @click="updateGuest">Confirmar presença</Button>
 		</template>
 	</Modal>
 </template>
@@ -29,7 +29,9 @@ import Modal from "../molecules/Modal.vue";
 import Checkbox from "../atoms/Checkbox.vue";
 import Input from "../atoms/Input.vue";
 import Button from "../atoms/Button.vue";
-import { reactive } from "vue";
+import { reactive, toRef, watchEffect } from "vue";
+import { useGuestStore } from "../../store/guest";
+import { useModalStore } from "../../store/modal";
 interface LoginModalData {
 	guestName: string;
 	confirmed: string;
@@ -42,6 +44,40 @@ const data: LoginModalData = reactive({
 	numberOfChildren: "0",
 	numberOfEscorts: "1"
 });
+
+const modalStore = useModalStore();
+const guestStore = useGuestStore();
+const guest = toRef(guestStore, "guest");
+
+watchEffect(() => {
+	if (guest.value) {
+		data.confirmed = guest.value.confirmed ? "yes" : "no";
+		data.guestName = guest.value.name;
+		data.numberOfChildren = String(guest.value.numberOfChildren);
+		data.numberOfEscorts = String(guest.value.numberOfEscorts);
+	}
+});
+const attemptToLogin = async () => {
+	try {
+		if (data.guestName) {
+			await guestStore.login(data.guestName);
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};
+const updateGuest = async () => {
+	try {
+		await guestStore.updateGuest({
+			confirmed: data.confirmed === "yes",
+			numberOfChildren: parseInt(data.numberOfChildren),
+			numberOfEscorts: parseInt(data.numberOfEscorts)
+		});
+		modalStore.closeModal();
+	} catch (error) {
+		console.error(error);
+	}
+}
 const onEscortsChange = (value: string) => {
 	if (Number(value) <= 2) {
 		data.numberOfEscorts = value;
@@ -51,5 +87,5 @@ const onChildrenChange = (value: string) => {
 	if (Number(value) <= 2) {
 		data.numberOfChildren = value;
 	}
-}
+};
 </script>

@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { Guest } from "../domain/entities/Guest";
 import { Login } from "../domain/services/Login";
+import { UpdateGuest } from "../domain/services/UpdateGuest";
 
 const initialState: { guest: Guest | null, accessToken: string | null } = {
 	guest: null,
@@ -8,6 +9,7 @@ const initialState: { guest: Guest | null, accessToken: string | null } = {
 };
 
 const loginService = new Login();
+const updateGuestService = new UpdateGuest();
 
 export const useGuestStore = defineStore("guest", {
 	state() {
@@ -27,6 +29,13 @@ export const useGuestStore = defineStore("guest", {
 			} catch (error) {
 				console.error(error);
 			}
+		},
+		async updateGuest(payload: Pick<Guest, "confirmed" | "numberOfChildren" | "numberOfEscorts">) {
+			if (!this.accessToken) throw new Error("User not logged in");
+			await updateGuestService.execute({
+				accessToken: this.accessToken,
+				...payload
+			});
 		}
 	}
 })

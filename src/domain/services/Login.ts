@@ -20,7 +20,10 @@ export class Login {
 			if (!response.ok) {
 				throw new HttpError(body.error || response.statusText, response.status);
 			}
-			return body;
+			return {
+				accessToken: body.authToken,
+				guest: body.guest
+			};
 		} catch (error) {
 			if (error instanceof Error) throw new HttpError(error.message);
 			throw error;

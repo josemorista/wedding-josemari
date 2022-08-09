@@ -21,33 +21,33 @@ const options = toRef(giftsStore, "options");
 const guest = toRef(useGuestStore(), "guest");
 
 const optionsWithQuantities = computed(() => {
-	let giftsList: Array<GiftOption & {givenQuantity: number}> = [];
-	for(const option of options.value) {
+	let giftsList: Array<GiftOption & { givenQuantity: number }> = [];
+	for (const option of options.value) {
 		const guestEntry = option.history.find(el => el.guestId === guest.value?.id);
-			giftsList.push({
-				...option,
-				givenQuantity: guestEntry?.quantity || 0
-			});
+		giftsList.push({
+			...option,
+			givenQuantity: guestEntry?.quantity || 0
+		});
 	}
 	return giftsList;
 });
 
-const onAddGift = (itemId: number) => {
+const onAddGift = async (itemId: number) => {
 	if (!guest.value) {
 		modalStore.openLoginModal();
 	} else {
-		giftsStore.addGift({
+		await giftsStore.addGift({
 			itemId,
 			quantity: 1
 		});
 	}
 };
 
-const onDropGift = (itemId: number) => {
+const onDropGift = async (itemId: number) => {
 	if (!guest.value) {
 		modalStore.openLoginModal();
 	} else {
-		giftsStore.dropGift({
+		await giftsStore.dropGift({
 			itemId,
 			quantity: 1
 		});

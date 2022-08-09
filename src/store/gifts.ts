@@ -1,6 +1,8 @@
 import { defineStore } from "pinia";
 import { GiftOption } from "../domain/entities/GiftOption";
+import { GiveGift } from "../domain/services/GiveGift";
 import { ListGiftOptions } from "../domain/services/ListGiftOptions";
+import { UpdateGiftQuantity } from "../domain/services/UpdateGiftQuantity";
 import { useGuestStore } from "./guest";
 
 interface GiftsStoreState {
@@ -17,6 +19,8 @@ const initialState: GiftsStoreState = {
 };
 
 const listGiftOptionsService = new ListGiftOptions();
+const giveGiftService = new GiveGift();
+const updateGiftQuantity = new UpdateGiftQuantity();
 
 export const useGiftsStore = defineStore("gifts", {
 	state() {
@@ -46,11 +50,23 @@ export const useGiftsStore = defineStore("gifts", {
 	actions: {
 		async addGift(entry: CartEntry) {
 			const guestStore = useGuestStore();
-			if (!guestStore.guest) throw new Error("User not logged in");
+			if (!guestStore.guest || !guestStore.accessToken) throw new Error("User not logged in");
 			const option = this.options.find(el => el.itemId === entry.itemId);
 			if (!option) throw new Error("Invalid item");
 			const fromGuest = option.history.find(el => el.guestId === guestStore.guest?.id);
-			// call api to insert or update
+			if (!fromGuest) {
+				await giveGiftService.execute({
+					accessToken: guestStore.accessToken,
+					itemId: entry.itemId,
+					quantity: entry.quantity
+				});
+			} else {
+				await updateGiftQuantity.execute({
+					accessToken: guestStore.accessToken,
+					itemId: entry.itemId,
+					quantity: entry.quantity + fromGuest.quantity
+				});
+			}
 			if (fromGuest) {
 				fromGuest.quantity += entry.quantity;
 			} else {
@@ -63,12 +79,16 @@ export const useGiftsStore = defineStore("gifts", {
 		},
 		async dropGift(entry: CartEntry) {
 			const guestStore = useGuestStore();
-			if (!guestStore.guest) throw new Error("User not logged in");
+			if (!guestStore.guest || !guestStore.accessToken) throw new Error("User not logged in");
 			const option = this.options.find(el => el.itemId === entry.itemId);
 			if (!option) throw new Error("Invalid item");
-			// Call api to drop gift
 			const fromGuest = option.history.find(el => el.guestId === guestStore.guest?.id);
 			if (fromGuest) {
+				await updateGiftQuantity.execute({
+					accessToken: guestStore.accessToken,
+					itemId: entry.itemId,
+					quantity: fromGuest.quantity - entry.quantity
+				});
 				fromGuest.quantity -= entry.quantity;
 				if (fromGuest.quantity <= 0) {
 					option.history = option.history.filter(entry => entry.guestId !== guestStore.guest?.id);

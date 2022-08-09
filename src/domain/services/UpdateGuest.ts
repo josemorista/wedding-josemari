@@ -1,24 +1,24 @@
+import { Guest } from "../entities/Guest";
 import { HttpError } from "../errors/HttpError";
 
-interface GiveGiftInput {
-	itemId: number;
-	quantity: number;
+type UpdateGuestInput = Omit<Guest, "name" | "id"> & {
 	accessToken: string;
 }
 
-export class GiveGift {
-
+export class UpdateGuest {
 	async execute({
 		accessToken,
-		itemId,
-		quantity
-	}: GiveGiftInput): Promise<void> {
+		confirmed,
+		numberOfChildren,
+		numberOfEscorts
+	}: UpdateGuestInput): Promise<void> {
 		try {
-			const response = await fetch(`${import.meta.env.VITE_API_URL}/gifts`, {
-				method: "POST",
+			const response = await fetch(`${import.meta.env.VITE_API_URL}/guests`, {
+				method: "PUT",
 				body: JSON.stringify({
-					itemId,
-					quantity
+					confirmed,
+					numberOfChildren,
+					numberOfEscorts
 				}),
 				headers: {
 					"Content-Type": "application/json",
