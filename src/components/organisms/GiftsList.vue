@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRef } from "@vue/reactivity";
+import { computed, toRef, toRefs } from "@vue/reactivity";
 import { GiftOption } from "../../domain/entities/GiftOption";
 import { useGiftsStore } from "../../store/gifts";
 import { useGuestStore } from "../../store/guest";
@@ -17,7 +17,7 @@ import GiftItem from "../molecules/GiftItem.vue";
 const giftsStore = useGiftsStore();
 const modalStore = useModalStore();
 
-const options = toRef(giftsStore, "options");
+const { options, isBusy } = toRefs(giftsStore);
 const guest = toRef(useGuestStore(), "guest");
 
 const optionsWithQuantities = computed(() => {
@@ -33,6 +33,7 @@ const optionsWithQuantities = computed(() => {
 });
 
 const onAddGift = async (itemId: number) => {
+	if (isBusy.value) return;
 	if (!guest.value) {
 		modalStore.openLoginModal();
 	} else {
@@ -44,6 +45,7 @@ const onAddGift = async (itemId: number) => {
 };
 
 const onDropGift = async (itemId: number) => {
+	if (isBusy.value) return;
 	if (!guest.value) {
 		modalStore.openLoginModal();
 	} else {

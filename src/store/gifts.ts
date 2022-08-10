@@ -7,6 +7,7 @@ import { useGuestStore } from "./guest";
 
 interface GiftsStoreState {
 	options: Array<GiftOption>;
+	isBusy: boolean;
 }
 
 interface CartEntry {
@@ -15,7 +16,8 @@ interface CartEntry {
 }
 
 const initialState: GiftsStoreState = {
-	options: []
+	options: [],
+	isBusy: false
 };
 
 const listGiftOptionsService = new ListGiftOptions();
@@ -54,28 +56,33 @@ export const useGiftsStore = defineStore("gifts", {
 			const option = this.options.find(el => el.itemId === entry.itemId);
 			if (!option) throw new Error("Invalid item");
 			const fromGuest = option.history.find(el => el.guestId === guestStore.guest?.id);
-			if (!fromGuest) {
-				await giveGiftService.execute({
-					accessToken: guestStore.accessToken,
-					itemId: entry.itemId,
-					quantity: entry.quantity
-				});
-			} else {
-				await updateGiftQuantity.execute({
-					accessToken: guestStore.accessToken,
-					itemId: entry.itemId,
-					quantity: entry.quantity + fromGuest.quantity
-				});
+			try {
+				this.isBusy = true;
+				if (!fromGuest) {
+					await giveGiftService.execute({
+						accessToken: guestStore.accessToken,
+						itemId: entry.itemId,
+						quantity: entry.quantity
+					});
+				} else {
+					await updateGiftQuantity.execute({
+						accessToken: guestStore.accessToken,
+						itemId: entry.itemId,
+						quantity: entry.quantity + fromGuest.quantity
+					});
+				}
+				if (fromGuest) {
+					fromGuest.quantity += entry.quantity;
+				} else {
+					option.history.push({
+						guestId: guestStore.guest.id,
+						quantity: entry.quantity
+					});
+				}
+				option.quantityAvailableToGive -= entry.quantity;
+			} finally {
+				this.isBusy = false;
 			}
-			if (fromGuest) {
-				fromGuest.quantity += entry.quantity;
-			} else {
-				option.history.push({
-					guestId: guestStore.guest.id,
-					quantity: entry.quantity
-				});
-			}
-			option.quantityAvailableToGive -= entry.quantity;
 		},
 		async dropGift(entry: CartEntry) {
 			const guestStore = useGuestStore();
@@ -83,17 +90,22 @@ export const useGiftsStore = defineStore("gifts", {
 			const option = this.options.find(el => el.itemId === entry.itemId);
 			if (!option) throw new Error("Invalid item");
 			const fromGuest = option.history.find(el => el.guestId === guestStore.guest?.id);
-			if (fromGuest) {
-				await updateGiftQuantity.execute({
-					accessToken: guestStore.accessToken,
-					itemId: entry.itemId,
-					quantity: fromGuest.quantity - entry.quantity
-				});
-				fromGuest.quantity -= entry.quantity;
-				if (fromGuest.quantity <= 0) {
-					option.history = option.history.filter(entry => entry.guestId !== guestStore.guest?.id);
+			try {
+				this.isBusy = true;
+				if (fromGuest) {
+					await updateGiftQuantity.execute({
+						accessToken: guestStore.accessToken,
+						itemId: entry.itemId,
+						quantity: fromGuest.quantity - entry.quantity
+					});
+					fromGuest.quantity -= entry.quantity;
+					if (fromGuest.quantity <= 0) {
+						option.history = option.history.filter(entry => entry.guestId !== guestStore.guest?.id);
+					}
+					option.quantityAvailableToGive += entry.quantity;
 				}
-				option.quantityAvailableToGive += entry.quantity;
+			} finally {
+				this.isBusy = false;
 			}
 		},
 		async loadOptions() {

@@ -3,30 +3,33 @@
 		<div class="item-preview">
 			<img :src="gift.picture" :alt="gift.name">
 			<span v-if="gift.givenQuantity" class="chosen-quantity">
-				x{{gift.givenQuantity}}
+				x{{ gift.givenQuantity }}
 			</span>
 		</div>
 		<p class="gift-name">
-			{{gift.name}}
+			{{ gift.name }}
 		</p>
 		<p class="gift-price">
-			{{gift.formattedPrice}}
+			{{ gift.formattedPrice }}
 		</p>
 		<p>
-			Precisamos: {{gift.quantityNeeded}}
+			Precisamos: {{ gift.quantityNeeded }}
 		</p>
 		<p>
-			Temos: {{gift.quantityNeeded - gift.quantityAvailableToGive}}
+			Temos: {{ gift.quantityNeeded - gift.quantityAvailableToGive }}
 		</p>
-		<Button color="pink" @click="() => {$emit('add-gift', gift.itemId);}" :disabled="gift.quantityAvailableToGive === 0">
-			Presentear
-		</Button>
-		<Button color="default">
-			Onde comprar?
-		</Button>
-		<Button v-if="!!gift.givenQuantity" color="default" @click="() => {$emit('drop-gift', gift.itemId);}">
-			Remover
-		</Button>
+		<div class="gift-item-buttons">
+			<Button color="pink" @click="() => { $emit('add-gift', gift.itemId); }"
+				:disabled="gift.quantityAvailableToGive === 0">
+				Presentear
+			</Button>
+			<Button color="default" @click="navigateToSuggestion" v-if="gift.suggestedSeller">
+				Onde comprar?
+			</Button>
+			<Button v-if="!!gift.givenQuantity" color="default" @click="() => { $emit('drop-gift', gift.itemId); }">
+				Remover
+			</Button>
+		</div>
 	</div>
 </template>
 
@@ -42,6 +45,12 @@ interface GiftItemEmits {
 	(event: "add-gift", itemId: number): void;
 	(event: "drop-gift", itemId: number): void;
 }
-defineProps<GiftItemProps>();
+const props = defineProps<GiftItemProps>();
 defineEmits<GiftItemEmits>();
+
+const navigateToSuggestion = () => {
+	if (props.gift.suggestedSeller) {
+		window.open(props.gift.suggestedSeller, '__blank')
+	}
+}
 </script>

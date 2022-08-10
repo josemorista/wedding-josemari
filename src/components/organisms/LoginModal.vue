@@ -59,7 +59,7 @@ watchEffect(() => {
 });
 const attemptToLogin = async () => {
 	try {
-		if (data.guestName) {
+		if (data.guestName && data.guestName.length >= 3) {
 			await guestStore.login(data.guestName);
 		}
 	} catch (error) {
