@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 interface ButtonProps {
-	color: "default" | "pink";
+	color: 'default' | 'pink';
 	disabled?: boolean;
 }
 interface ButtonEmits {

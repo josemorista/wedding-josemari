@@ -13,5 +13,5 @@
 </template>
 
 <script setup lang="ts">
-import SectionTitle from "../atoms/SectionTitle.vue";
+import SectionTitle from '../atoms/SectionTitle.vue';
 </script>

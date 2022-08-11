@@ -7,18 +7,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRef, toRefs } from "@vue/reactivity";
-import { GiftOption } from "../../domain/entities/GiftOption";
-import { useGiftsStore } from "../../store/gifts";
-import { useGuestStore } from "../../store/guest";
-import { useModalStore } from "../../store/modal";
-import GiftItem from "../molecules/GiftItem.vue";
+import { computed, toRef, toRefs } from 'vue';
+import { GiftOption } from '../../domain/entities/GiftOption';
+import { useGiftsStore } from '../../store/gifts';
+import { useGuestStore } from '../../store/guest';
+import { useModalStore } from '../../store/modal';
+import GiftItem from '../molecules/GiftItem.vue';
 
 const giftsStore = useGiftsStore();
 const modalStore = useModalStore();
 
 const { options, isBusy } = toRefs(giftsStore);
-const guest = toRef(useGuestStore(), "guest");
+const guest = toRef(useGuestStore(), 'guest');
 
 const optionsWithQuantities = computed(() => {
 	let giftsList: Array<GiftOption & { givenQuantity: number }> = [];

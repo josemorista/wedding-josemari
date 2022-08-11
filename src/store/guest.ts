@@ -1,17 +1,21 @@
-import { defineStore } from "pinia";
-import { Guest } from "../domain/entities/Guest";
-import { Login } from "../domain/services/Login";
-import { UpdateGuest } from "../domain/services/UpdateGuest";
+import { defineStore } from 'pinia';
+import { Guest } from '../domain/entities/Guest';
+import { AttemptToRetrieveSession } from '../domain/services/AttemptToRetrieveSession';
+import { CacheService } from '../domain/services/CacheService';
+import { Login } from '../domain/services/Login';
+import { UpdateGuest } from '../domain/services/UpdateGuest';
 
 const initialState: { guest: Guest | null, accessToken: string | null } = {
 	guest: null,
 	accessToken: null
 };
 
-const loginService = new Login();
+const cacheService = new CacheService();
+const attemptToRetrieveSession = new AttemptToRetrieveSession(cacheService);
+const loginService = new Login(cacheService);
 const updateGuestService = new UpdateGuest();
 
-export const useGuestStore = defineStore("guest", {
+export const useGuestStore = defineStore('guest', {
 	state() {
 		return initialState;
 	},
@@ -30,12 +34,19 @@ export const useGuestStore = defineStore("guest", {
 				console.error(error);
 			}
 		},
-		async updateGuest(payload: Pick<Guest, "confirmed" | "numberOfChildren" | "numberOfEscorts">) {
-			if (!this.accessToken) throw new Error("User not logged in");
+		async updateGuest(payload: Pick<Guest, 'confirmed' | 'numberOfChildren' | 'numberOfEscorts'>) {
+			if (!this.accessToken) throw new Error('User not logged in');
 			await updateGuestService.execute({
 				accessToken: this.accessToken,
 				...payload
 			});
+		},
+		async attemptToLogin() {
+			const session = await attemptToRetrieveSession.execute();
+			if (session) {
+				this.guest = session.guest;
+				this.accessToken = session.accessToken;
+			}
 		}
 	}
-})
+});

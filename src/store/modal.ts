@@ -1,23 +1,23 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
 interface ModalStore {
-	currentOpen: "login" | "cart" | null;
+	currentOpen: 'login' | 'cart' | null;
 }
 
 const initialState: ModalStore = {
 	currentOpen: null
 };
 
-export const useModalStore = defineStore("modal", {
+export const useModalStore = defineStore('modal', {
 	state() {
-		return initialState
+		return initialState;
 	},
 	actions: {
 		openLoginModal() {
-			this.currentOpen = "login";
+			this.currentOpen = 'login';
 		},
 		openCartModal() {
-			this.currentOpen = "cart";
+			this.currentOpen = 'cart';
 		},
 		closeModal() {
 			this.currentOpen = null;

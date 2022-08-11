@@ -1,9 +1,9 @@
-import { defineStore } from "pinia";
-import { GiftOption } from "../domain/entities/GiftOption";
-import { GiveGift } from "../domain/services/GiveGift";
-import { ListGiftOptions } from "../domain/services/ListGiftOptions";
-import { UpdateGiftQuantity } from "../domain/services/UpdateGiftQuantity";
-import { useGuestStore } from "./guest";
+import { defineStore } from 'pinia';
+import { GiftOption } from '../domain/entities/GiftOption';
+import { GiveGift } from '../domain/services/GiveGift';
+import { ListGiftOptions } from '../domain/services/ListGiftOptions';
+import { UpdateGiftQuantity } from '../domain/services/UpdateGiftQuantity';
+import { useGuestStore } from './guest';
 
 interface GiftsStoreState {
 	options: Array<GiftOption>;
@@ -24,7 +24,7 @@ const listGiftOptionsService = new ListGiftOptions();
 const giveGiftService = new GiveGift();
 const updateGiftQuantity = new UpdateGiftQuantity();
 
-export const useGiftsStore = defineStore("gifts", {
+export const useGiftsStore = defineStore('gifts', {
 	state() {
 		return initialState;
 	},
@@ -52,9 +52,9 @@ export const useGiftsStore = defineStore("gifts", {
 	actions: {
 		async addGift(entry: CartEntry) {
 			const guestStore = useGuestStore();
-			if (!guestStore.guest || !guestStore.accessToken) throw new Error("User not logged in");
+			if (!guestStore.guest || !guestStore.accessToken) throw new Error('User not logged in');
 			const option = this.options.find(el => el.itemId === entry.itemId);
-			if (!option) throw new Error("Invalid item");
+			if (!option) throw new Error('Invalid item');
 			const fromGuest = option.history.find(el => el.guestId === guestStore.guest?.id);
 			try {
 				this.isBusy = true;
@@ -86,9 +86,9 @@ export const useGiftsStore = defineStore("gifts", {
 		},
 		async dropGift(entry: CartEntry) {
 			const guestStore = useGuestStore();
-			if (!guestStore.guest || !guestStore.accessToken) throw new Error("User not logged in");
+			if (!guestStore.guest || !guestStore.accessToken) throw new Error('User not logged in');
 			const option = this.options.find(el => el.itemId === entry.itemId);
-			if (!option) throw new Error("Invalid item");
+			if (!option) throw new Error('Invalid item');
 			const fromGuest = option.history.find(el => el.guestId === guestStore.guest?.id);
 			try {
 				this.isBusy = true;
@@ -109,7 +109,7 @@ export const useGiftsStore = defineStore("gifts", {
 			}
 		},
 		async loadOptions() {
-			this.options = await listGiftOptionsService.execute();;
+			this.options = await listGiftOptionsService.execute();
 		}
 	}
 });

@@ -1,11 +1,11 @@
-import { GiftOption } from "../entities/GiftOption";
-import { HttpError } from "../errors/HttpError";
+import { GiftOption } from '../entities/GiftOption';
+import { HttpError } from '../errors/HttpError';
 
 const priceFormatter = new Intl.NumberFormat('pt-BR', {
 	style: 'currency',
 	currency: 'BRL',
 	minimumFractionDigits: 2
-})
+});
 
 export class ListGiftOptions {
 	private formatPrices(option: Omit<GiftOption, 'formattedPrice'>) {
@@ -15,9 +15,9 @@ export class ListGiftOptions {
 	async execute(): Promise<Array<GiftOption>> {
 		try {
 			const response = await fetch(`${import.meta.env.VITE_API_URL}/gifts`, {
-				method: "GET",
+				method: 'GET',
 				headers: {
-					"Content-Type": "application/json"
+					'Content-Type': 'application/json'
 				}
 			});
 			const body = await response.json();

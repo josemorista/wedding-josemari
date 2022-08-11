@@ -34,23 +34,23 @@
 </template>
 
 <script setup lang="ts">
-import { GiftOption } from "../../domain/entities/GiftOption";
-import Button from "../atoms/Button.vue";
+import { GiftOption } from '../../domain/entities/GiftOption';
+import Button from '../atoms/Button.vue';
 interface GiftItemProps {
 	gift: GiftOption & {
 		givenQuantity: number
 	};
 }
 interface GiftItemEmits {
-	(event: "add-gift", itemId: number): void;
-	(event: "drop-gift", itemId: number): void;
+	(event: 'add-gift', itemId: number): void;
+	(event: 'drop-gift', itemId: number): void;
 }
 const props = defineProps<GiftItemProps>();
 defineEmits<GiftItemEmits>();
 
 const navigateToSuggestion = () => {
 	if (props.gift.suggestedSeller) {
-		window.open(props.gift.suggestedSeller, '__blank')
+		window.open(props.gift.suggestedSeller, '__blank');
 	}
-}
+};
 </script>

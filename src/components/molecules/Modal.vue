@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
-import { useModalStore } from "../../store/modal";
+import { onMounted, onUnmounted } from 'vue';
+import { useModalStore } from '../../store/modal';
 
 interface ModalProps {
 	title: string;
@@ -26,20 +26,20 @@ interface ModalProps {
 defineProps<ModalProps>();
 
 onMounted(() => {
-	const body = document.querySelector("body");
+	const body = document.querySelector('body');
 	if (body) {
-		body.style.overflow = "hidden";
+		body.style.overflow = 'hidden';
 	}
 });
 onUnmounted(() => {
-	const body = document.querySelector("body");
+	const body = document.querySelector('body');
 	if (body) {
-		body.style.overflow = "auto";
+		body.style.overflow = 'auto';
 	}
 });
 
 const modalStore = useModalStore();
 const closeModal = () => {
 	modalStore.closeModal();
-}
+};
 </script>

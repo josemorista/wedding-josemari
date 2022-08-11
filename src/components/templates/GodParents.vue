@@ -33,6 +33,6 @@
 </template>
 
 <script setup lang="ts">
-import SectionTitle from "../atoms/SectionTitle.vue";
-import PicturesGrid from "../molecules/PicturesGrid.vue";
+import SectionTitle from '../atoms/SectionTitle.vue';
+import PicturesGrid from '../molecules/PicturesGrid.vue';
 </script>

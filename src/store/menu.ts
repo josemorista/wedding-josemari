@@ -1,4 +1,4 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
 interface MenuStore {
 	isOpen: boolean;
@@ -6,9 +6,9 @@ interface MenuStore {
 
 const initialState: MenuStore = {
 	isOpen: false
-}
+};
 
-export const useMenuStore = defineStore("menu", {
+export const useMenuStore = defineStore('menu', {
 	state() {
 		return initialState;
 	},

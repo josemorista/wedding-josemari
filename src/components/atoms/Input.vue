@@ -5,21 +5,21 @@
 </template>
 
 <script setup lang="ts">
-import { InputHTMLAttributes } from "vue";
+import { InputHTMLAttributes } from 'vue';
 interface InputProps {
-	type: InputHTMLAttributes["type"];
+	type: InputHTMLAttributes['type'];
 	modelValue: string;
 	label?: string;
 	maxWidth?: string;
-	max?: InputHTMLAttributes["max"]
+	max?: InputHTMLAttributes['max']
 }
 interface InputEmits {
-	(event: "update:modelValue", value: string): void;
+	(event: 'update:modelValue', value: string): void;
 }
 const props = defineProps<InputProps>();
 const emitter = defineEmits<InputEmits>();
 const onValueChange = ($event: any) => {
-	emitter("update:modelValue", $event.target.value);
+	emitter('update:modelValue', $event.target.value);
 	$event.target.value = props.modelValue;
 };
 </script>

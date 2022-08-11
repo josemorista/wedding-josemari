@@ -1,4 +1,4 @@
-import { HttpError } from "../errors/HttpError";
+import { HttpError } from '../errors/HttpError';
 
 interface GiveGiftInput {
 	itemId: number;
@@ -15,14 +15,14 @@ export class GiveGift {
 	}: GiveGiftInput): Promise<void> {
 		try {
 			const response = await fetch(`${import.meta.env.VITE_API_URL}/gifts`, {
-				method: "POST",
+				method: 'POST',
 				body: JSON.stringify({
 					itemId,
 					quantity
 				}),
 				headers: {
-					"Content-Type": "application/json",
-					"Authorization": `Bearer ${accessToken}`
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${accessToken}`
 				}
 			});
 			if (!response.ok) {

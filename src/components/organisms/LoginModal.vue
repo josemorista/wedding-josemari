@@ -25,13 +25,13 @@
 </template>
 
 <script setup lang="ts">
-import Modal from "../molecules/Modal.vue";
-import Checkbox from "../atoms/Checkbox.vue";
-import Input from "../atoms/Input.vue";
-import Button from "../atoms/Button.vue";
-import { reactive, toRef, watchEffect } from "vue";
-import { useGuestStore } from "../../store/guest";
-import { useModalStore } from "../../store/modal";
+import Modal from '../molecules/Modal.vue';
+import Checkbox from '../atoms/Checkbox.vue';
+import Input from '../atoms/Input.vue';
+import Button from '../atoms/Button.vue';
+import { reactive, toRef, watchEffect } from 'vue';
+import { useGuestStore } from '../../store/guest';
+import { useModalStore } from '../../store/modal';
 interface LoginModalData {
 	guestName: string;
 	confirmed: string;
@@ -39,19 +39,19 @@ interface LoginModalData {
 	numberOfChildren: string;
 }
 const data: LoginModalData = reactive({
-	confirmed: "yes",
-	guestName: "",
-	numberOfChildren: "0",
-	numberOfEscorts: "1"
+	confirmed: 'yes',
+	guestName: '',
+	numberOfChildren: '0',
+	numberOfEscorts: '1'
 });
 
 const modalStore = useModalStore();
 const guestStore = useGuestStore();
-const guest = toRef(guestStore, "guest");
+const guest = toRef(guestStore, 'guest');
 
 watchEffect(() => {
 	if (guest.value) {
-		data.confirmed = guest.value.confirmed ? "yes" : "no";
+		data.confirmed = guest.value.confirmed ? 'yes' : 'no';
 		data.guestName = guest.value.name;
 		data.numberOfChildren = String(guest.value.numberOfChildren);
 		data.numberOfEscorts = String(guest.value.numberOfEscorts);
@@ -69,7 +69,7 @@ const attemptToLogin = async () => {
 const updateGuest = async () => {
 	try {
 		await guestStore.updateGuest({
-			confirmed: data.confirmed === "yes",
+			confirmed: data.confirmed === 'yes',
 			numberOfChildren: parseInt(data.numberOfChildren),
 			numberOfEscorts: parseInt(data.numberOfEscorts)
 		});
@@ -77,7 +77,7 @@ const updateGuest = async () => {
 	} catch (error) {
 		console.error(error);
 	}
-}
+};
 const onEscortsChange = (value: string) => {
 	if (Number(value) <= 2) {
 		data.numberOfEscorts = value;

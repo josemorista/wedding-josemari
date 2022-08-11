@@ -1,7 +1,7 @@
-import { Guest } from "../entities/Guest";
-import { HttpError } from "../errors/HttpError";
+import { Guest } from '../entities/Guest';
+import { HttpError } from '../errors/HttpError';
 
-type UpdateGuestInput = Omit<Guest, "name" | "id"> & {
+type UpdateGuestInput = Omit<Guest, 'name' | 'id'> & {
 	accessToken: string;
 }
 
@@ -14,15 +14,15 @@ export class UpdateGuest {
 	}: UpdateGuestInput): Promise<void> {
 		try {
 			const response = await fetch(`${import.meta.env.VITE_API_URL}/guests`, {
-				method: "PUT",
+				method: 'PUT',
 				body: JSON.stringify({
 					confirmed,
 					numberOfChildren,
 					numberOfEscorts
 				}),
 				headers: {
-					"Content-Type": "application/json",
-					"Authorization": `Bearer ${accessToken}`
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${accessToken}`
 				}
 			});
 			if (!response.ok) {
