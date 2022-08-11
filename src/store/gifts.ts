@@ -13,6 +13,7 @@ interface GiftsStoreState {
 interface CartEntry {
 	itemId: number;
 	quantity: number;
+	details: Pick<GiftOption, 'picture' | 'name' | 'formattedPrice'>
 }
 
 const initialState: GiftsStoreState = {
@@ -38,7 +39,12 @@ export const useGiftsStore = defineStore('gifts', {
 				if (fromGuest) {
 					cart.push({
 						itemId: option.itemId,
-						quantity: fromGuest.quantity
+						quantity: fromGuest.quantity,
+						details: {
+							name: option.name,
+							picture: option.picture,
+							formattedPrice: option.formattedPrice
+						}
 					});
 				}
 			}
@@ -50,7 +56,7 @@ export const useGiftsStore = defineStore('gifts', {
 		}
 	},
 	actions: {
-		async addGift(entry: CartEntry) {
+		async addGift(entry: Pick<CartEntry, 'itemId' | 'quantity'>) {
 			const guestStore = useGuestStore();
 			if (!guestStore.guest || !guestStore.accessToken) throw new Error('User not logged in');
 			const option = this.options.find(el => el.itemId === entry.itemId);
@@ -84,7 +90,7 @@ export const useGiftsStore = defineStore('gifts', {
 				this.isBusy = false;
 			}
 		},
-		async dropGift(entry: CartEntry) {
+		async dropGift(entry: Pick<CartEntry, 'itemId' | 'quantity'>) {
 			const guestStore = useGuestStore();
 			if (!guestStore.guest || !guestStore.accessToken) throw new Error('User not logged in');
 			const option = this.options.find(el => el.itemId === entry.itemId);

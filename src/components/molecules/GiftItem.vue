@@ -1,7 +1,7 @@
 <template>
 	<div class="gift-item">
 		<div class="item-preview">
-			<img :src="gift.picture" :alt="gift.name">
+			<img :src="`src/assets/imgs/gifts/${gift.picture}`" :alt="gift.name">
 			<span v-if="gift.givenQuantity" class="chosen-quantity">
 				x{{ gift.givenQuantity }}
 			</span>

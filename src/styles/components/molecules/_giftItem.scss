@@ -13,9 +13,10 @@ div.gift-item {
 
 		img {
 			width: 100%;
-			min-height: 100%;
-			object-fit: cover;
-			background-color: lightgray;
+			height: 100%;
+			object-fit: contain;
+			object-position: center center;
+			background-color: transparent;
 		}
 
 		span.chosen-quantity {
