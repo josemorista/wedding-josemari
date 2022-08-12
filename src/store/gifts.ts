@@ -13,7 +13,7 @@ interface GiftsStoreState {
 interface CartEntry {
 	itemId: number;
 	quantity: number;
-	details: Pick<GiftOption, 'picture' | 'name' | 'formattedPrice'>
+	details: Pick<GiftOption, 'picture' | 'name' | 'formattedPrice' | 'averagePrice'>
 }
 
 const initialState: GiftsStoreState = {
@@ -43,7 +43,8 @@ export const useGiftsStore = defineStore('gifts', {
 						details: {
 							name: option.name,
 							picture: option.picture,
-							formattedPrice: option.formattedPrice
+							formattedPrice: option.formattedPrice,
+							averagePrice: option.averagePrice
 						}
 					});
 				}
@@ -53,6 +54,9 @@ export const useGiftsStore = defineStore('gifts', {
 		},
 		totalItensOnCart(): number {
 			return this.cart.reduce((sum, current) => sum + current.quantity, 0);
+		},
+		cartTotal(): number {
+			return this.cart.reduce((sum, current) => sum + current.quantity * current.details.averagePrice, 0);
 		}
 	},
 	actions: {
