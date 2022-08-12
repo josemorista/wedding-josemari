@@ -1,7 +1,7 @@
 <template>
-	<button class="gifts-card-button" @click="onCartClick">
-		<img src="src/assets/imgs/shopping-cart.svg" alt="cart">
-		<div v-if="totalItensOnCart" class="gift-count-badge">
+	<button v-if="totalItensOnCart" class="gifts-card-button" @click="onCartClick">
+		<img src="src/assets/imgs/shopping-cart.svg" alt="cart" />
+		<div class="gift-count-badge">
 			{{ totalItensOnCart }}
 		</div>
 	</button>

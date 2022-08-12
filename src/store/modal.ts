@@ -5,7 +5,7 @@ interface ModalStore {
 }
 
 const initialState: ModalStore = {
-	currentOpen: 'cart'
+	currentOpen: null
 };
 
 export const useModalStore = defineStore('modal', {

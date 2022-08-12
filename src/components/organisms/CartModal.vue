@@ -2,43 +2,37 @@
 	<Modal title="Carrinho de presentes">
 		<template v-slot:content>
 			<div class="cart-modal-content">
-					<ul class="cart-items">
-						<li v-for="item of cart" :key="item.itemId">
-						<div class="cart-item-details">
-							<img :src="`src/assets/imgs/gifts/${item.details.picture}`" alt="">
-							<div class="cart-item-info">
-								<p>
-									{{ item.details.name }}
-								</p>
-								<p class="cart-item-price">
-									{{ item.details.formattedPrice }}
-									<span class="cart-item-quantity">x{{ item.quantity }}</span>
-								</p>
-							</div>
-						</div>
-						<div class="cart-item-actions">
-							<button @click="onRemoveItemClick(item.itemId)">Remover x1</button>
-						</div>
+				<ul class="cart-items">
+					<li v-for="item of cart" :key="item.itemId">
+						<CartItem
+							:item="{
+								name: item.details.name,
+								quantity: item.quantity,
+								formattedPrice: item.details.formattedPrice,
+								picture: item.details.picture
+							}"
+							@on-remove-click="onRemoveItemClick(item.itemId)"
+						/>
 					</li>
 				</ul>
-				<section class="payment-info">
+				<div class="payment-info">
 					<p class="cart-total">
-						{{formattedTotal}}
+						Total da compra: <span>{{ formattedTotal }}</span>
 					</p>
 					<ul class="payment-types">
-						<li @click="setSelectedPayment('pix')">
-							<img src="" alt="">
-							<p>Pix</p>
-						</li>
-						<li @click="setSelectedPayment('store')">
-							<img src="" alt="">
-							<p>Loja</p>
+						<li v-for="payment of paymentOptions" :key="payment.value">
+							<PaymentTypeButton
+								@click="setSelectedPayment(payment.value)"
+								:picture="payment.picture"
+								:title="payment.title"
+								:selected="selectedPayment === payment.value"
+							/>
 						</li>
 					</ul>
 					<div class="pix-display" v-if="selectedPayment === 'pix'">
-						<img src="" alt="">
+						<img src="src/assets/imgs/qrcode.png" alt="" />
 					</div>
-				</section>
+				</div>
 			</div>
 		</template>
 	</Modal>
@@ -48,13 +42,28 @@
 import { computed, ref, toRefs } from 'vue';
 import { useGiftsStore } from '../../store/gifts';
 import Modal from '../molecules/Modal.vue';
+import CartItem from '../molecules/CartItem.vue';
+import PaymentTypeButton from '../atoms/PaymentTypeButton.vue';
 
 type SelectedPaymentState = 'pix' | 'store' | null;
 
 const giftsStore = useGiftsStore();
-const {cart, cartTotal} = toRefs(giftsStore);
+const { cart, cartTotal } = toRefs(giftsStore);
 
 const selectedPayment = ref<SelectedPaymentState>(null);
+
+const paymentOptions = [
+	{
+		title: 'Pix',
+		picture: 'pix.png',
+		value: 'pix'
+	},
+	{
+		title: 'Loja',
+		picture: 'store.png',
+		value: 'store'
+	}
+] as const;
 
 const priceFormatter = new Intl.NumberFormat('pt-BR', {
 	style: 'currency',
@@ -71,7 +80,7 @@ const onRemoveItemClick = async (itemId: number) => {
 		await giftsStore.dropGift({
 			itemId,
 			quantity: 1
-		});	
+		});
 	} catch (error) {
 		console.error(error);
 	}

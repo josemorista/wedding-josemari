@@ -59,6 +59,8 @@ div.modal-container {
 
 	.modal-content {
 		padding: 1rem 1.5rem;
+		max-height: 60vh;
+		overflow: auto;
 	}
 
 	.modal-footer {

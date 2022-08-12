@@ -1,0 +1,35 @@
+div.cart-item {
+	display: flex;
+	gap: 0.5rem;
+	justify-content: space-between;
+	align-items: flex-end;
+
+	.cart-item-details {
+		display: flex;
+		gap: 0.5rem;
+
+		p {
+			&.cart-item-name {
+				font-family: Lancaste;
+				margin-bottom: 4px;
+			}
+		}
+
+		img {
+			background-color: transparent;
+			height: 48px;
+			width: 48px;
+			object-fit: contain;
+			object-position: center center;
+		}
+	}
+
+	.cart-item-actions {
+		button {
+			color: $color-pink-600;
+			min-width: 70px;
+			background-color: transparent;
+			border: none;
+		}
+	}
+}

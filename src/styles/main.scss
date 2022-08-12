@@ -15,15 +15,18 @@
 @import './components/atoms/input';
 @import './components/atoms/checkbox';
 @import './components/atoms/giftCartButton';
+@import './components/atoms/paymentTypeButton';
 
 @import './components/molecules/sectionLinks';
 @import './components/molecules/picturesGrid';
 @import './components/molecules/giftItem';
+@import './components/molecules/cartItem';
 @import './components/molecules/modal';
 
 @import './components/organisms/navBar';
 @import './components/organisms/sidebarMenu';
 @import './components/organisms/giftsList';
+@import './components/organisms/cartModal';
 
 // Views
 @import './components/templates/app';
