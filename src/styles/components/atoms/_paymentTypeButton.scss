@@ -10,6 +10,11 @@ button.payment-type-button {
 	background-color: transparent;
 	cursor: pointer;
 
+	img {
+		width: 36px;
+		height: 36px;
+	}
+
 	&.selected {
 		border-color: $color-pink-600;
 	}

@@ -26,6 +26,7 @@ div.cart-item {
 
 	.cart-item-actions {
 		button {
+			cursor: pointer;
 			color: $color-pink-600;
 			min-width: 70px;
 			background-color: transparent;

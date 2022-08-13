@@ -32,7 +32,16 @@ div.cart-modal-content {
 		}
 	}
 
-	.pix-display {
+	.payment-display {
+		p {
+			margin: 0.5rem 0;
+			font-size: 15px;
+		}
+
+		strong {
+			font-size: inherit;
+		}
+
 		img {
 			width: 120px;
 			height: 120px;

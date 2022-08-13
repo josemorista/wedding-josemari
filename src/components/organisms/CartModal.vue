@@ -29,11 +29,22 @@
 							/>
 						</li>
 					</ul>
-					<div class="pix-display" v-if="selectedPayment === 'pix'">
+					<div class="payment-display" v-if="selectedPayment === 'pix'">
+						<p>Pode nos enviar o valor desejado diretamente em nosso pix 😉:</p>
 						<img src="src/assets/imgs/qrcode.png" alt="" />
+					</div>
+
+					<div class="payment-display" v-if="selectedPayment === 'store'">
+						<p>
+							Caso deseje nos enviar, o endereço para entrega é
+							<strong>Rua Zoraida Brasil Alcantâra, n° 86, apto 303, Fonseca Niterói. CEP 24130-135. 🙂</strong>
+						</p>
 					</div>
 				</div>
 			</div>
+		</template>
+		<template v-slot:footer>
+			<Button color="pink" @click="onConfirmClick">Confirmar</Button>
 		</template>
 	</Modal>
 </template>
@@ -44,18 +55,21 @@ import { useGiftsStore } from '../../store/gifts';
 import Modal from '../molecules/Modal.vue';
 import CartItem from '../molecules/CartItem.vue';
 import PaymentTypeButton from '../atoms/PaymentTypeButton.vue';
+import Button from '../atoms/Button.vue';
+import { useModalStore } from '../../store/modal';
 
 type SelectedPaymentState = 'pix' | 'store' | null;
 
 const giftsStore = useGiftsStore();
 const { cart, cartTotal } = toRefs(giftsStore);
+const modalStore = useModalStore();
 
 const selectedPayment = ref<SelectedPaymentState>(null);
 
 const paymentOptions = [
 	{
 		title: 'Pix',
-		picture: 'pix.png',
+		picture: 'pix.svg',
 		value: 'pix'
 	},
 	{
@@ -88,5 +102,9 @@ const onRemoveItemClick = async (itemId: number) => {
 
 const setSelectedPayment = (payment: SelectedPaymentState) => {
 	selectedPayment.value = payment;
+};
+
+const onConfirmClick = () => {
+	modalStore.closeModal();
 };
 </script>
