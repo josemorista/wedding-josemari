@@ -1,6 +1,6 @@
 <template>
 	<button :class="{ 'payment-type-button': true, selected }">
-		<img :src="`src/assets/imgs/payment/${picture}`" alt="" />
+		<img :src="`/assets/imgs/payment/${picture}`" alt="" />
 		<p>{{ title }}</p>
 	</button>
 </template>

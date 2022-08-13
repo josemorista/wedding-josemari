@@ -1,7 +1,7 @@
 <template>
-	<div :class="{ 'pictures-grid': true, 'large': large }">
+	<div :class="{ 'pictures-grid': true, large: large }">
 		<div class="picture-grid-item" v-for="picture of pictures" :key="picture.picture">
-			<img class="grid-picture" :src="`src/assets/imgs/${picture.picture}`" :alt="picture.legend">
+			<img class="grid-picture" :src="`/assets/imgs/${picture.picture}`" :alt="picture.legend" />
 			<legend v-if="picture.legend">
 				{{ picture.legend }}
 			</legend>
@@ -15,5 +15,4 @@ interface PicturesGridProps {
 	large?: boolean;
 }
 defineProps<PicturesGridProps>();
-
 </script>

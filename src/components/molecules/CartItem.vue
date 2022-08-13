@@ -1,7 +1,7 @@
 <template>
 	<div class="cart-item">
 		<div class="cart-item-details">
-			<img :src="`src/assets/imgs/gifts/${item.picture}`" alt="" />
+			<img :src="`/assets/imgs/gifts/${item.picture}`" alt="" />
 			<div class="cart-item-info">
 				<p class="cart-item-name">
 					{{ item.name }}

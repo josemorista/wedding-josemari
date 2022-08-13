@@ -3,7 +3,7 @@
 		<h1>
 			{{ title }}
 		</h1>
-		<img src="../../assets/imgs/title-icon.png" alt="...">
+		<img src="/assets/imgs/title-icon.png" alt="..." />
 	</div>
 </template>
 

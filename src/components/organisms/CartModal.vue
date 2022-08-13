@@ -31,7 +31,7 @@
 					</ul>
 					<div class="payment-display" v-if="selectedPayment === 'pix'">
 						<p>Pode nos enviar o valor desejado diretamente em nosso pix 😉:</p>
-						<img src="src/assets/imgs/qrcode.png" alt="" />
+						<img src="/assets/imgs/qrcode.png" alt="" />
 					</div>
 
 					<div class="payment-display" v-if="selectedPayment === 'store'">

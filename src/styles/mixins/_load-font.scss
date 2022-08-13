@@ -2,7 +2,7 @@
 	@font-face {
 		font-family: $name;
 		font-weight: $weight;
-		src: url('../assets/fonts/' + $path + '.woff2') format('woff2'),
-			url('../assets/fonts/' + $path + '.woff') format('woff');
+		src: url('/assets/fonts/' + $path + '.woff2') format('woff2'),
+			url('/assets/fonts/' + $path + '.woff') format('woff');
 	}
 }
