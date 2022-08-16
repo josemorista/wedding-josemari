@@ -1,28 +1,22 @@
 <template>
 	<section class="about" id="app-about-section">
 		<p>
-			Criamos esse site para compartilhar com vocês os detalhes da organização do nosso casamento. Estamos muito felizes
-			e contamos com a presença de todos no nosso grande dia!
+			Olá, amigas, amigos e família! Criamos esse espaço para compartilhar com vocês os detalhes do nosso grande dia.
+			Cada pessoa convidada tem um lugar especial no nosso coração e queremos muito que faça parte do nosso casamento.
 		</p>
 		<p>
-			Aqui vocês encontrarão também dicas para hospedagem, salão de beleza, trajes, estacionamento, etc.
+			Aqui vocês encontrarão nossa história, nossos padrinhos, a localização do evento, a nossa lista de presentes e a
+			tão importante confirmação de presença. Essa parte é super importante pra nós, por isso pedimos com todo o carinho
+			que vocês cliquem em “Confirme sua presença” no nosso menu e preencham com os dados necessários.
 		</p>
 		<p>
-			Ah, é importante também confirmar sua presença. Para isto contamos com sua ajuda clicando no menu “Confirme sua
-			Presença” e preenchendo os dados necessários.
+			Para nos presentear você pode escolher qualquer um dos itens disponíveis na nossa lista de presentes, selecionar a
+			quantidade que deseja e finalizar o pedido através do pix ou nas lojas que deixamos sugeridas. Caso queira enviar
+			o presente diretamente para nós, fique a vontade para nos pedir o endereço por whatsapp.
 		</p>
 		<p>
-			Para nos presentear, escolha qualquer item da Lista de Casamento, seja um item de algum dos sites, lojas físicas,
-			ou
-			então vocês podem utilizar a opção de cotas. Fiquem à vontade!
+			“Quando você é criança, você assume que os seus pais são almas gêmeas. Meus filhos vão estar certos sobre isso”
 		</p>
-		<p>
-			"... UM CORDÃO DE TRÊS DOBRASNÃO SE ROMPE COM FACILIDADE."
-			<br />
-			ECLESIASTE 4:12
-		</p>
-		<p>
-			Aguardamos vocês no nosso grande dia!
-		</p>
+		<p>Contamos com você para testemunhar o início da nossa família!</p>
 	</section>
 </template>

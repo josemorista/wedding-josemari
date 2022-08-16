@@ -1,3 +1,15 @@
 div.login-modal-content {
-	
+	button.btn {
+		&:first-of-type {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+	}
+
+	.custom-input {
+		&:first-of-type {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+	}
 }

@@ -20,6 +20,7 @@
 						$emit('add-gift', gift.itemId);
 					}
 				"
+				:is-busy="isAddBusy"
 				:disabled="gift.quantityAvailableToGive === 0"
 			>
 				Presentear
@@ -28,6 +29,7 @@
 			<Button
 				v-if="!!gift.givenQuantity"
 				color="default"
+				:is-busy="isDropBusy"
 				@click="
 					() => {
 						$emit('drop-gift', gift.itemId);
@@ -44,6 +46,8 @@
 import { GiftOption } from '../../domain/entities/GiftOption';
 import Button from '../atoms/Button.vue';
 interface GiftItemProps {
+	isAddBusy: boolean;
+	isDropBusy: boolean;
 	gift: GiftOption & {
 		givenQuantity: number;
 	};
