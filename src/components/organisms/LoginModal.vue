@@ -1,22 +1,36 @@
 <template>
 	<Modal title="Confirme sua presença">
 		<template v-slot:content>
-			<label class="custom-input-label">
-				Nome na lista de presença:
-			</label>
-			<form style="display:flex" @submit.prevent="attemptToLogin">
+			<label class="custom-input-label"> Nome na lista de presença: </label>
+			<form style="display: flex" @submit.prevent="attemptToLogin">
 				<Input type="text" v-model="data.guestName" />
-				<Button type="submit" color="default">Buscar</Button>
+				<Button type="submit" color="default" :is-busy="loading">Buscar</Button>
 			</form>
 			<br />
-			<Checkbox :options="[{ label: 'Sim', value: 'yes' }, { label: 'Não', value: 'no' }]" label="Você irá ao evento?"
-				v-model="data.confirmed" />
+			<Checkbox
+				:options="[
+					{ label: 'Sim', value: 'yes' },
+					{ label: 'Não', value: 'no' }
+				]"
+				label="Você irá ao evento?"
+				v-model="data.confirmed"
+			/>
 			<br />
-			<Input type="number" max-width="100px" :model-value="data.numberOfEscorts" @update:model-value="onEscortsChange"
-				label="Quantidade de adultos incluindo você:" />
+			<Input
+				type="number"
+				max-width="100px"
+				:model-value="data.numberOfEscorts"
+				@update:model-value="onEscortsChange"
+				label="Quantidade de adultos incluindo você:"
+			/>
 			<br />
-			<Input type="number" max-width="100px" :model-value="data.numberOfChildren" @update:model-value="onChildrenChange"
-				label="Quantidade de crianças:" />
+			<Input
+				type="number"
+				max-width="100px"
+				:model-value="data.numberOfChildren"
+				@update:model-value="onChildrenChange"
+				label="Quantidade de crianças:"
+			/>
 		</template>
 		<template v-slot:footer>
 			<Button color="pink" @click="updateGuest">Confirmar presença</Button>
@@ -29,7 +43,7 @@ import Modal from '../molecules/Modal.vue';
 import Checkbox from '../atoms/Checkbox.vue';
 import Input from '../atoms/Input.vue';
 import Button from '../atoms/Button.vue';
-import { reactive, toRef, watchEffect } from 'vue';
+import { reactive, ref, toRef, watchEffect } from 'vue';
 import { useGuestStore } from '../../store/guest';
 import { useModalStore } from '../../store/modal';
 interface LoginModalData {
@@ -48,6 +62,7 @@ const data: LoginModalData = reactive({
 const modalStore = useModalStore();
 const guestStore = useGuestStore();
 const guest = toRef(guestStore, 'guest');
+const loading = ref(false);
 
 watchEffect(() => {
 	if (guest.value) {
@@ -57,7 +72,9 @@ watchEffect(() => {
 		data.numberOfEscorts = String(guest.value.numberOfEscorts);
 	}
 });
+
 const attemptToLogin = async () => {
+	loading.value = true;
 	try {
 		if (data.guestName && data.guestName.length >= 3) {
 			await guestStore.login(data.guestName);
@@ -65,8 +82,11 @@ const attemptToLogin = async () => {
 	} catch (error) {
 		console.error(error);
 	}
+	loading.value = false;
 };
+
 const updateGuest = async () => {
+	loading.value = true;
 	try {
 		await guestStore.updateGuest({
 			confirmed: data.confirmed === 'yes',
@@ -77,6 +97,7 @@ const updateGuest = async () => {
 	} catch (error) {
 		console.error(error);
 	}
+	loading.value = false;
 };
 const onEscortsChange = (value: string) => {
 	if (Number(value) <= 2) {
