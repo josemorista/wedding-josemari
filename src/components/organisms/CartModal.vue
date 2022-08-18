@@ -30,13 +30,13 @@
 						</li>
 					</ul>
 					<div class="payment-display" v-if="selectedPayment === 'pix'">
-						<p>Pode nos enviar o valor desejado diretamente em nosso pix 😉:</p>
+						<p>Caso deseje, pode nos enviar o valor desejado diretamente em nosso pix 😉:</p>
 						<img src="/assets/imgs/qrcode.png" alt="" />
 					</div>
 
 					<div class="payment-display" v-if="selectedPayment === 'store'">
 						<p>
-							Caso deseje nos enviar, o endereço para entrega é
+							Caso deseje nos enviar o presente, o endereço para entrega é
 							<strong>Rua Zoraida Brasil Alcantâra, n° 86, apto 303, Fonseca Niterói. CEP 24130-135. 🙂</strong>
 						</p>
 					</div>
