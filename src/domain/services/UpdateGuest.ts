@@ -3,27 +3,22 @@ import { HttpError } from '../errors/HttpError';
 
 type UpdateGuestInput = Omit<Guest, 'name' | 'id'> & {
 	accessToken: string;
-}
+};
 
 export class UpdateGuest {
-	async execute({
-		accessToken,
-		confirmed,
-		numberOfChildren,
-		numberOfEscorts
-	}: UpdateGuestInput): Promise<void> {
+	async execute({ accessToken, confirmed, numberOfChildren, escorts }: UpdateGuestInput): Promise<void> {
 		try {
 			const response = await fetch(`${import.meta.env.VITE_API_URL}/guests`, {
 				method: 'PUT',
 				body: JSON.stringify({
 					confirmed,
 					numberOfChildren,
-					numberOfEscorts
+					escorts,
 				}),
 				headers: {
 					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${accessToken}`
-				}
+					Authorization: `Bearer ${accessToken}`,
+				},
 			});
 			if (!response.ok) {
 				const body = await response.json();

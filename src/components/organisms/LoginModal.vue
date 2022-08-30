@@ -29,7 +29,7 @@
 				/>
 				<div class="escorts" v-if="data.numberOfEscorts">
 					<br />
-					<Input type="text" :model-value="data.escortName" label="Nome do acompanhante:" />
+					<Input type="text" v-model="data.escortName" label="Nome do acompanhante:" />
 				</div>
 				<br />
 				<Input
@@ -94,6 +94,7 @@ watchEffect(() => {
 		data.guestName = guest.value.name;
 		data.numberOfChildren = guest.value.numberOfChildren;
 		data.numberOfEscorts = guest.value.escorts.length;
+		data.escortName = guest.value.escorts.length ? guest.value.escorts[0].name : '';
 	}
 });
 

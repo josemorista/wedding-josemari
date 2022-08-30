@@ -36,6 +36,11 @@ export const useGuestStore = defineStore('guest', {
 				accessToken: this.accessToken,
 				...payload,
 			});
+			if (this.guest) {
+				this.guest.confirmed = payload.confirmed;
+				this.guest.escorts = payload.escorts;
+				this.guest.numberOfChildren = payload.numberOfChildren;
+			}
 		},
 		async attemptToLogin() {
 			const session = await attemptToRetrieveSession.execute();
