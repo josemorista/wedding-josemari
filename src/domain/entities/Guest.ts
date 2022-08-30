@@ -3,5 +3,5 @@ export interface Guest {
 	name: string;
 	confirmed: boolean;
 	numberOfChildren: number;
-	numberOfEscorts: number;
+	escorts: Array<{ name: string }>;
 }

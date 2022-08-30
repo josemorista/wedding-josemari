@@ -5,9 +5,9 @@ import { CacheService } from '../domain/services/CacheService';
 import { Login } from '../domain/services/Login';
 import { UpdateGuest } from '../domain/services/UpdateGuest';
 
-const initialState: { guest: Guest | null, accessToken: string | null } = {
+const initialState: { guest: Guest | null; accessToken: string | null } = {
 	guest: null,
-	accessToken: null
+	accessToken: null,
 };
 
 const cacheService = new CacheService();
@@ -22,23 +22,19 @@ export const useGuestStore = defineStore('guest', {
 	getters: {
 		isLogged: (state) => {
 			return !!state.guest;
-		}
+		},
 	},
 	actions: {
 		async login(name: string) {
-			try {
-				const { accessToken, guest } = await loginService.execute(name);
-				this.guest = guest;
-				this.accessToken = accessToken;
-			} catch (error) {
-				console.error(error);
-			}
+			const { accessToken, guest } = await loginService.execute(name);
+			this.guest = guest;
+			this.accessToken = accessToken;
 		},
-		async updateGuest(payload: Pick<Guest, 'confirmed' | 'numberOfChildren' | 'numberOfEscorts'>) {
+		async updateGuest(payload: Pick<Guest, 'confirmed' | 'numberOfChildren' | 'escorts'>) {
 			if (!this.accessToken) throw new Error('User not logged in');
 			await updateGuestService.execute({
 				accessToken: this.accessToken,
-				...payload
+				...payload,
 			});
 		},
 		async attemptToLogin() {
@@ -47,6 +43,6 @@ export const useGuestStore = defineStore('guest', {
 				this.guest = session.guest;
 				this.accessToken = session.accessToken;
 			}
-		}
-	}
+		},
+	},
 });

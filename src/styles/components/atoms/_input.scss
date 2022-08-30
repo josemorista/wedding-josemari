@@ -20,4 +20,12 @@ input.custom-input {
 	&:focus {
 		border: 1px solid $color-pink-400;
 	}
+
+	&.error {
+		border-color: $color-red-600;
+	}
+
+	&:disabled {
+		opacity: 0.5;
+	}
 }

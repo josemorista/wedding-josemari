@@ -12,4 +12,11 @@ div.login-modal-content {
 			border-bottom-right-radius: 0;
 		}
 	}
+
+	p {
+		&.login-error {
+			color: $color-red-600;
+			margin-top: 0.4rem;
+		}
+	}
 }

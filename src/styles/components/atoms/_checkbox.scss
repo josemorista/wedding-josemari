@@ -2,7 +2,11 @@ div.checkbox-options {
 	display: flex;
 	gap: 1rem;
 
-	>.checkbox-option {
+	&.disabled {
+		opacity: 0.8;
+	}
+
+	> .checkbox-option {
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
