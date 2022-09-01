@@ -13,7 +13,7 @@ const initialState: { guest: Guest | null; accessToken: string | null } = {
 const cacheService = new CacheService();
 const attemptToRetrieveSession = new AttemptToRetrieveSession(cacheService);
 const loginService = new Login(cacheService);
-const updateGuestService = new UpdateGuest();
+const updateGuestService = new UpdateGuest(cacheService);
 
 export const useGuestStore = defineStore('guest', {
 	state() {
