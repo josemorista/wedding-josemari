@@ -2,7 +2,7 @@
 	<section class="location" id="app-location-section">
 		<SectionTitle title="Cerimônia" />
 		<p>
-			<strong> 12 de março de 2023, às 17:30h.</strong>
+			<strong> 12 de março de 2023, às 17:00h.</strong>
 			Rua Clotilde Maria Linhares Pinsky, 91 - Charitas, Niterói - Rio de Janeiro, 24370-015
 		</p>
 		<img class="tropical-picture" src="/assets/imgs/tropical.webp" alt="Tropical Casa de Festas" />

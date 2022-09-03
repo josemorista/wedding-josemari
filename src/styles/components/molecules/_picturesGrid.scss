@@ -5,12 +5,13 @@ div.pictures-grid {
 	max-width: 45rem;
 	gap: 12px;
 
-	>.picture-grid-item {
+	> .picture-grid-item {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		max-width: calc(50% - 1rem);
+		max-height: 12rem;
 
 		img {
 			width: 100%;
@@ -26,20 +27,25 @@ div.pictures-grid {
 	}
 }
 
-@include responsive("md") {
+@include responsive('md') {
 	div.pictures-grid {
+		> .picture-grid-item {
+			max-height: 24rem;
+		}
+
 		&.large {
-			>.picture-grid-item {
+			> .picture-grid-item {
+				max-height: 28rem;
 				max-width: calc(33% - 12px);
 			}
 		}
 	}
 }
 
-@include responsive("lg") {
+@include responsive('lg') {
 	div.pictures-grid {
 		&.large {
-			>.picture-grid-item {
+			> .picture-grid-item {
 				max-width: calc(25% - 12px);
 
 				img {
