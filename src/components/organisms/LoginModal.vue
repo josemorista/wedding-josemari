@@ -26,13 +26,9 @@
 					label="Quantidade de acompanhantes adultos:"
 					:disabled="!guestStore.isLogged"
 				/>
-				<div
-					class="escorts"
-					v-for="(escort, escortIndex) of data.numberOfEscorts - 1"
-					:key="`${escort}-${escortIndex}`"
-				>
+				<div class="escorts" v-for="escortIndex of data.numberOfEscorts" :key="`escort-${escortIndex}`">
 					<br />
-					<Input type="text" v-model="data.escorts[escortIndex]" :label="`Nome do acompanhante ${escortIndex + 1}:`" />
+					<Input type="text" v-model="data.escorts[escortIndex - 1]" :label="`Nome do acompanhante ${escortIndex}:`" />
 				</div>
 				<br />
 				<Input
