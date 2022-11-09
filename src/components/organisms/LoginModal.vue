@@ -22,19 +22,21 @@
 				<Input
 					type="number"
 					max-width="100px"
-					v-model="data.numberOfEscorts"
+					:model-value="data.numberOfEscorts"
+					@update:model-value="onNumberOfEscortsUpdate"
 					label="Quantidade de acompanhantes adultos:"
 					:disabled="!guestStore.isLogged"
 				/>
-				<div class="escorts" v-for="escortIndex of data.numberOfEscorts" :key="`escort-${escortIndex}`">
+				<div class="escorts" v-for="(escort, escortIndex) in data.escorts" :key="`escort-${escortIndex}`">
 					<br />
-					<Input type="text" v-model="data.escorts[escortIndex - 1]" :label="`Nome do acompanhante ${escortIndex}:`" />
+					<Input type="text" v-model="data.escorts[escortIndex]" :label="`Nome do acompanhante ${escortIndex + 1}:`" />
 				</div>
 				<br />
 				<Input
 					type="number"
 					max-width="100px"
-					v-model="data.numberOfChildren"
+					:model-value="data.numberOfChildren"
+					@update:model-value="onNumberOfChildrenUpdate"
 					label="Quantidade de crianças:"
 					:disabled="!guestStore.isLogged"
 				/>
@@ -78,6 +80,7 @@ const loadings = reactive({
 	login: false,
 	confirm: false,
 });
+
 const loginError = ref<string | null>(null);
 
 watch(toRef(data, 'guestName'), () => {
@@ -97,6 +100,28 @@ watchEffect(() => {
 		}
 	}
 });
+
+watchEffect(() => {
+	if (data.escorts.length < data.numberOfEscorts) {
+		data.escorts.push('');
+	} else if (data.escorts.length > data.numberOfEscorts) {
+		data.escorts.pop();
+	}
+});
+
+const onNumberOfEscortsUpdate = (_escortsNumber: string | number) => {
+	const escortsNumber = Number(_escortsNumber);
+	if (escortsNumber >= 0) {
+		data.numberOfEscorts = escortsNumber;
+	}
+};
+
+const onNumberOfChildrenUpdate = (_childrenNumber: string | number) => {
+	const childrenNumber = Number(_childrenNumber);
+	if (childrenNumber >= 0) {
+		data.numberOfChildren = childrenNumber;
+	}
+};
 
 const attemptToLogin = async () => {
 	loadings.login = true;
@@ -121,9 +146,11 @@ const updateGuest = async () => {
 		await guestStore.updateGuest({
 			confirmed: data.confirmed === 'yes',
 			numberOfChildren: data.numberOfChildren,
-			escorts: data.escorts.map((name) => ({
-				name,
-			})),
+			escorts: data.escorts
+				.filter((el) => !!el)
+				.map((name) => ({
+					name,
+				})),
 		});
 		modalStore.closeModal();
 	} catch (error) {
