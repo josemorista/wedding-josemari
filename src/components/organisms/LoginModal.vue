@@ -134,7 +134,7 @@ const attemptToLogin = async () => {
 		}
 	} catch (error) {
 		console.error(error);
-		loginError.value = 'Ops, nome não encontrado na lista :(';
+		loginError.value = 'Ops, ainda não conseguimos encontrar seu nome na lista :(';
 	}
 
 	loadings.login = false;
