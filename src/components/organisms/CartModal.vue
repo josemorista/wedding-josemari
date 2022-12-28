@@ -37,7 +37,7 @@
 					<div class="payment-display" v-if="selectedPayment === 'store'">
 						<p>
 							Caso deseje nos enviar o presente, o endereço para entrega é
-							<strong>{{ import.meta.env.VITE_OUR_ADDRESS || '' }}</strong>
+							<strong>{{ ourAddress }}</strong>
 						</p>
 					</div>
 				</div>
@@ -64,6 +64,7 @@ const giftsStore = useGiftsStore();
 const { cart, cartTotal } = toRefs(giftsStore);
 const modalStore = useModalStore();
 
+const ourAddress = import.meta.env.VITE_OUR_ADDRESS || '';
 const selectedPayment = ref<SelectedPaymentState>(null);
 
 const paymentOptions = [
