@@ -9,7 +9,7 @@
 								name: item.details.name,
 								quantity: item.quantity,
 								formattedPrice: item.details.formattedPrice,
-								picture: item.details.picture
+								picture: item.details.picture,
 							}"
 							@on-remove-click="onRemoveItemClick(item.itemId)"
 						/>
@@ -37,7 +37,7 @@
 					<div class="payment-display" v-if="selectedPayment === 'store'">
 						<p>
 							Caso deseje nos enviar o presente, o endereço para entrega é
-							<strong>Rua Zoraida Brasil Alcantâra, n° 86, apto 303, Fonseca Niterói. CEP 24130-135. 🙂</strong>
+							<strong>{{ import.meta.env.VITE_OUR_ADDRESS || '' }}</strong>
 						</p>
 					</div>
 				</div>
@@ -70,19 +70,19 @@ const paymentOptions = [
 	{
 		title: 'Pix',
 		picture: 'pix.svg',
-		value: 'pix'
+		value: 'pix',
 	},
 	{
 		title: 'Loja',
 		picture: 'store.png',
-		value: 'store'
-	}
+		value: 'store',
+	},
 ] as const;
 
 const priceFormatter = new Intl.NumberFormat('pt-BR', {
 	style: 'currency',
 	currency: 'BRL',
-	minimumFractionDigits: 2
+	minimumFractionDigits: 2,
 });
 
 const formattedTotal = computed(() => {
@@ -93,7 +93,7 @@ const onRemoveItemClick = async (itemId: number) => {
 	try {
 		await giftsStore.dropGift({
 			itemId,
-			quantity: 1
+			quantity: 1,
 		});
 	} catch (error) {
 		console.error(error);
