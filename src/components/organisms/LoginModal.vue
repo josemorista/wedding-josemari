@@ -22,12 +22,12 @@
 				<Input
 					type="number"
 					max-width="100px"
-					:model-value="data.numberOfEscorts"
+					:model-value="data.numberOfEscorts.toPrecision(1)"
 					@update:model-value="onNumberOfEscortsUpdate"
 					label="Quantidade de acompanhantes adultos:"
 					:disabled="!guestStore.isLogged"
 				/>
-				<div class="escorts" v-for="(escort, escortIndex) in data.escorts" :key="`escort-${escortIndex}`">
+				<div class="escorts" v-for="(_, escortIndex) in new Array(data.numberOfEscorts)" :key="`escort-${escortIndex}`">
 					<br />
 					<Input type="text" v-model="data.escorts[escortIndex]" :label="`Nome do acompanhante ${escortIndex + 1}:`" />
 				</div>
@@ -101,18 +101,17 @@ watchEffect(() => {
 	}
 });
 
-watchEffect(() => {
-	if (data.escorts.length < data.numberOfEscorts) {
+const matchNumberOfEscorts = () => {
+	while (data.escorts.length < data.numberOfEscorts) {
 		data.escorts.push('');
-	} else if (data.escorts.length > data.numberOfEscorts) {
-		data.escorts.pop();
 	}
-});
+};
 
 const onNumberOfEscortsUpdate = (_escortsNumber: string | number) => {
-	const escortsNumber = Number(_escortsNumber);
-	if (escortsNumber >= 0) {
+	const escortsNumber = Number(_escortsNumber || 0);
+	if (escortsNumber >= 0 && escortsNumber <= 5) {
 		data.numberOfEscorts = escortsNumber;
+		matchNumberOfEscorts();
 	}
 };
 
@@ -147,6 +146,7 @@ const updateGuest = async () => {
 			confirmed: data.confirmed === 'yes',
 			numberOfChildren: data.numberOfChildren,
 			escorts: data.escorts
+				.slice(0, data.numberOfEscorts)
 				.filter((el) => !!el)
 				.map((name) => ({
 					name,
