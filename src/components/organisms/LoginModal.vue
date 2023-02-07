@@ -95,6 +95,7 @@ watchEffect(() => {
 		data.guestName = guest.value.name;
 		data.numberOfChildren = guest.value.numberOfChildren;
 		data.numberOfEscorts = guest.value.escorts.length;
+		data.escorts = [];
 		for (const escort of guest.value.escorts) {
 			data.escorts.push(escort.name);
 		}
