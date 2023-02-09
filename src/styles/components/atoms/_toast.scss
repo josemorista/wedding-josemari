@@ -1,0 +1,35 @@
+@keyframes load-toast {
+	from {
+		opacity: 0.5;
+		transform: translateY(100%);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.toast {
+	position: fixed;
+	z-index: 101;
+	bottom: 1px;
+	right: 0;
+	width: 100%;
+	padding: 1.2rem;
+
+	background-color: $color-white-100;
+	border-left: 6px solid $color-pink-400;
+
+	animation-name: load-toast;
+	animation-duration: 0.5s;
+
+	&-message {
+		color: $color-gray-600;
+	}
+
+	@include responsive('md') {
+		max-width: fit-content;
+		right: 1rem;
+		bottom: 1rem;
+	}
+}

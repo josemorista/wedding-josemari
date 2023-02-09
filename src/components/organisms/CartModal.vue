@@ -1,4 +1,5 @@
 <template>
+	<Toast ref="toastRef" />
 	<Modal title="Carrinho de presentes">
 		<template v-slot:content>
 			<div class="cart-modal-content">
@@ -29,9 +30,13 @@
 							/>
 						</li>
 					</ul>
-					<div class="payment-display" v-if="selectedPayment === 'pix'">
+					<div :class="`payment-display ${selectedPayment}`" v-if="selectedPayment === 'pix'">
 						<p>Caso deseje, pode nos enviar o valor desejado diretamente em nosso pix 😉:</p>
 						<img src="/assets/imgs/qrcode.png" alt="" />
+						<Button class="payment-display-pix" color="default" @click="onCopyPixCode">
+							<img src="/assets/imgs/clipboard.svg" alt="" />
+							Clique aqui para copiar
+						</Button>
 					</div>
 
 					<div class="payment-display" v-if="selectedPayment === 'store'">
@@ -57,6 +62,7 @@ import CartItem from '../molecules/CartItem.vue';
 import PaymentTypeButton from '../atoms/PaymentTypeButton.vue';
 import Button from '../atoms/Button.vue';
 import { useModalStore } from '../../store/modal';
+import Toast, { ToastExposes } from '../atoms/Toast.vue';
 
 type SelectedPaymentState = 'pix' | 'store' | null;
 
@@ -64,6 +70,7 @@ const giftsStore = useGiftsStore();
 const { cart, cartTotal } = toRefs(giftsStore);
 const modalStore = useModalStore();
 
+const toastRef = ref<ToastExposes>();
 const ourAddress = import.meta.env.VITE_OUR_ADDRESS || '';
 const selectedPayment = ref<SelectedPaymentState>(null);
 
@@ -107,5 +114,12 @@ const setSelectedPayment = (payment: SelectedPaymentState) => {
 
 const onConfirmClick = () => {
 	modalStore.closeModal();
+};
+
+const onCopyPixCode = () => {
+	navigator.clipboard.writeText(import.meta.env.VITE_PIX_KEY);
+	toastRef.value?.setToast({
+		message: 'A chave Pix foi copiada para a área de transferência! 🫶',
+	});
 };
 </script>
